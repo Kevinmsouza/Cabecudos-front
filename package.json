@@ -14,7 +14,7 @@
         "sweetalert2": "^11.1.9"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start": "REACT_APP_API_URL=prod react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
