@@ -2,20 +2,41 @@ import styled from "styled-components";
 import logo from "../assets/logo2.png";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { IoIosArrowDown } from "react-icons/io";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useHistory } from "react-router";
+import UserContext from "../contexts/UserContext";
+import { closeSession } from "../services/Cabecudos";
 
 export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
+    // const {avatar, token} = useContext(UserContext);
     const avatar = null;
+    const history = useHistory();
+
+    function relocate(whereTo) {
+        history.push(whereTo);
+        setShowDropDown(false);
+    }
+
+    function logoutHandler() {
+        // closeSession(token)
+        // .then(res => {
+        //     Location.reload();
+        // })
+        // .catch(err => {
+        //     alert(err);
+        // })
+    }
+
     return (
         <>
             <Wrapper>
-                <Logo>
+                <Logo onClick={() => relocate("/")}>
                     <p>Cabeçudos</p>
                     <img src={logo} alt="Cabeçudos"/>
                 </Logo>
                 <Buttons>
-                    <Cart>
+                    <Cart onClick={() => relocate("/cart")}>
                         <RiShoppingCartLine />
                         <Counter>0</Counter>
                     </Cart>
@@ -27,14 +48,14 @@ export default function Menu() {
             </Wrapper>
             <DropDownMenu showDropDown={showDropDown} avatar={avatar}>
                 {avatar ? 
-                    <p>Sair</p> :
+                    <p onClick={logoutHandler}>Sair</p> :
                     <>
-                        <p>Entrar</p>
-                        <p>Cadastrar</p>
+                        <p onClick={() => relocate("/sign-in")}>Entrar</p>
+                        <p onClick={() => relocate("/sign-up")}>Cadastrar</p>
                     </> 
                 }
             </DropDownMenu>
-            {showDropDown ? <Blank onClick={() => setShowDropDown(!showDropDown)}/> : ""}
+            {showDropDown ? <Blank onClick={() => setShowDropDown(false)}/> : ""}
         </>
     );
 }
@@ -65,7 +86,7 @@ const Blank = styled.div`
 const DropDownMenu = styled.div`
     position: fixed;
     z-index: 2;
-    top: ${({showDropDown, avatar}) => showDropDown ? `50px` : avatar?`20px` : `-15px`};    
+    top: ${({showDropDown, avatar}) => showDropDown ? `50px` : avatar ? `20px` : `-15px`};    
     right: 0;
     width: 100px;
     background: #FFFFFF;
