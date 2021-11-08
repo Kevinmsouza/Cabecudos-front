@@ -6,13 +6,13 @@ export default function App() {
     return (
         <BrowserRouter>
             <Switch>
+                <Route path="/sign-up" exact />
+                <Route path="/sign-in" exact />
                 <>
                     <Menu />
                     <Route path="/" exact ></Route>
                     <Route path="/cart" exact />
                 </>
-                <Route path="/sign-up" exact />
-                <Route path="/sign-in" exact />
                 <Route path="*">
                     <Redirect to="/" />
                 </Route>

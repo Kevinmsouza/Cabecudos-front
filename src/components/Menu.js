@@ -6,11 +6,13 @@ import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import UserContext from "../contexts/UserContext";
 import { closeSession } from "../services/Cabecudos";
+import { sendAlert } from "./shared/Alerts";
 
 export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
-    // const {avatar, token} = useContext(UserContext);
+    // const {avatar, token, cart} = useContext(UserContext);
     const avatar = null;
+    const cart = [];
     const history = useHistory();
 
     function relocate(whereTo) {
@@ -21,10 +23,11 @@ export default function Menu() {
     function logoutHandler() {
         // closeSession(token)
         // .then(res => {
+        //     localStorage.clear();
         //     Location.reload();
         // })
         // .catch(err => {
-        //     alert(err);
+        //     sendAlert("error", "Oops... ;(", "Houve um problema para terminar a sessão, tente novamente.");
         // })
     }
 
@@ -38,7 +41,7 @@ export default function Menu() {
                 <Buttons>
                     <Cart onClick={() => relocate("/cart")}>
                         <RiShoppingCartLine />
-                        <Counter>0</Counter>
+                        <Counter>{cart.length}</Counter>
                     </Cart>
                     <Avatar showDropDown={showDropDown} onClick={() => setShowDropDown(!showDropDown)}>
                         <img src={avatar||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
@@ -135,8 +138,8 @@ const Counter = styled.div`
     background: #00A4C5;
     border-radius: 30px;
     font-size: 12px;
-    line-height: 12px;
-    width: 10px;
+    max-width: 50px;
+    min-width: 17px;
 `;
 
 const Cart = styled.button`
