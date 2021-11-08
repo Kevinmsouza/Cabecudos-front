@@ -5,7 +5,7 @@ export default function App() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact />
+                <Route path="/" exact >{process.env.API_URL === "prod" ? "https://cabecudos-back.herokuapp.com" : "http://localhost:4000"}</Route>
                 <Route path="/sign-up" exact />
                 <Route path="/sign-in" exact />
                 <Route path="/cart" exact />
