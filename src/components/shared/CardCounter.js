@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import styled from "styled-components"
 
-
 export default function CardCounter ({value, setValue, isDisabled, stock}) {
     useEffect(() => {
         if (value < 0) setValue(0)
@@ -41,6 +40,9 @@ const QtdBox = styled.input`
     color: #fff;
     &:focus {
         outline: none;
+    }
+    &:disabled {
+        background-color: lightgrey;
     }
 `;
 

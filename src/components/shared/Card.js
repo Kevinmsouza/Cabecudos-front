@@ -1,17 +1,50 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components"
 import CardCounter from "./CardCounter";
 import { CardButtom } from "./styledComponents";
-
+import CartContext from "../../contexts/CartContext"
+import { sendAlert } from "./Alerts";
 
 export default function Card ({data}) {
     const {id, name, price, stock, images} = data;
     const [imgIndex, setImgIndex] = useState(0)
     const [counterValue, setCounterValue] = useState(stock <= 0 ? 0 : 1)
     const stockColor = stock <= 0 ? '#E44747' : stock <= 10 ? '#E4A647' : '#3EC453';
+    const {cart, setcart} = useContext(CartContext)
 
     function nextImg () {
         setImgIndex((imgIndex + 1) % images.length)
+    }
+
+    function addToCart () {
+        if (counterValue <= 0) return
+        const indexOfProduct = cart.map(e => e.id).indexOf(id)
+        if (indexOfProduct < 0){
+            setcart([...cart, {id, qtd: counterValue}])
+            sendAlert('success', '🛒 É pra já!', `
+                O produto foi adicionado ao seu carrinho!
+                Precione o icone de carrinho no menu para fazer o checkout
+                ou continue comprando!
+            `)
+        } else {
+            const newCart = [...cart]
+            if (newCart[indexOfProduct].qtd + counterValue > stock){
+                newCart[indexOfProduct].qtd = stock;
+                sendAlert('success', '💸 E la se vai o estoque!', `
+                Alteramos a quantidade desse item no carrinho!
+                Infelizmente não temos a quantidade desejada desse produto 
+                então colocamos nosso estoque inteiro (${stock} un)! 
+                Confira no icone de carrinho no menu!
+            `)
+            } else {
+                newCart[indexOfProduct].qtd += counterValue;
+                sendAlert('success', `🛒 Adicionamos + ${counterValue} desse Pop no carrinho!`, `
+                Alteramos a quantidade desse item no carrinho!
+                Você agora tem ${newCart[indexOfProduct].qtd} desses no carrinho!
+            `)
+            } 
+            setcart(newCart)
+        }
     }
 
     return (
@@ -29,7 +62,7 @@ export default function Card ({data}) {
                 isDisabled={stock <= 0} 
                 stock={stock} 
             />
-            <CardButtom >Colocar no carrinho</CardButtom>
+            <CardButtom onClick={addToCart} disabled={stock <= 0} >Colocar no carrinho</CardButtom>
         </CardSC>
     )
 }

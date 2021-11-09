@@ -19,6 +19,9 @@ const CardButtom = styled.button`
     font-size: 18px;
     line-height: 27px;
     font-family: "Poppins", sans-serif;
+    &:disabled {
+        background-color: lightgrey;
+    }
 `;
 
 export { 
