@@ -10,7 +10,8 @@ import { sendAlert } from "./shared/Alerts";
 
 export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
-    // const {avatar, token, cart} = useContext(UserContext);
+    // const {avatar, token} = useContext(UserContext);
+    // const {cart} = useContext(CartContext);
     const avatar = null;
     const cart = [];
     const history = useHistory();
@@ -55,7 +56,7 @@ export default function Menu() {
                     <>
                         <p onClick={() => relocate("/sign-in")}>Entrar</p>
                         <p onClick={() => relocate("/sign-up")}>Cadastrar</p>
-                    </> 
+                    </>
                 }
             </DropDownMenu>
             {showDropDown ? <Blank onClick={() => setShowDropDown(false)}/> : ""}
@@ -74,6 +75,7 @@ const Wrapper = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
 `;
 
 const Blank = styled.div`
