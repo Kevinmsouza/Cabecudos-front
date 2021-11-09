@@ -1,11 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components"
+import CardCounter from "./CardCounter";
+import { CardButtom } from "./styledComponents";
 
 
 export default function Card ({data}) {
     const {id, name, price, stock, images} = data;
     const [imgIndex, setImgIndex] = useState(0)
-    const stockColor = stock < 0 ? '#E44747' : stock <= 10 ? '#E4A647' : '#3EC453';
+    const [counterValue, setCounterValue] = useState(stock <= 0 ? 0 : 1)
+    const stockColor = stock <= 0 ? '#E44747' : stock <= 10 ? '#E4A647' : '#3EC453';
 
     function nextImg () {
         setImgIndex((imgIndex + 1) % images.length)
@@ -20,6 +23,13 @@ export default function Card ({data}) {
             </CardImgBox>
             <CardName>{name}</CardName>
             <CardPrice>R${(price/100).toFixed(2)}</CardPrice>
+            <CardCounter 
+                value={counterValue} 
+                setValue={setCounterValue} 
+                isDisabled={stock <= 0} 
+                stock={stock} 
+            />
+            <CardButtom >Colocar no carrinho</CardButtom>
         </CardSC>
     )
 }
@@ -32,6 +42,7 @@ const CardSC = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 10px;
 `;
 
 const CardImg = styled.img`

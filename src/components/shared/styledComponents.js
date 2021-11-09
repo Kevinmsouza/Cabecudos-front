@@ -8,4 +8,20 @@ const PageStyle = styled.article`
     gap: 20px;
 `;
 
-export { PageStyle };
+const CardButtom = styled.button`
+    width: 250px;
+    height: 50px;
+    background-color: #3EA4C4;
+    color: #fff;
+    border-radius: 15px;
+    border: none;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 27px;
+    font-family: "Poppins", sans-serif;
+`;
+
+export { 
+    PageStyle,
+    CardButtom,
+};
