@@ -3,17 +3,16 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import CartContext from "./contexts/CartContext";
 import Home from "./components/pages/Home";
 import Menu from "./components/Menu";
-import { useState } from "react/cjs/react.development";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function App() {
-    const [cart, setcart] = useState([]);
+    const [cart, setCart] = useState([]);
 
     // Gets cart info from local storage if possible
     useEffect(() => {
         const localCart = localStorage.getItem("cart");
         if (localCart) {
-            setcart(JSON.parse(localCart));
+            setCart(JSON.parse(localCart));
         }
     }, [])
 
@@ -22,7 +21,7 @@ export default function App() {
     }, [cart])
 
     return (
-        <CartContext.Provider value={{cart, setcart}}>
+        <CartContext.Provider value={{cart, setCart}}>
             <BrowserRouter>
                 <Switch>
                     <Route path="/sign-up" exact />
