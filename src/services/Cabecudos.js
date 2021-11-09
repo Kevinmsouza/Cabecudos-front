@@ -15,6 +15,11 @@ function closeSession(token) {
     return axios.delete(`${BASE_URL}/sign-out`, createConfig(token));
 }
 
+function getProducts () {
+    return axios.get(`${BASE_URL}/products`)
+}
+
 export {
     closeSession,
+    getProducts,
 }
