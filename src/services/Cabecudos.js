@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = process.env.API_URL === "prod" ? "https://cabecudos-back.herokuapp.com" : "http://localhost:4000";
+const BASE_URL = process.env.REACT_APP_API_URL === "prod" ? "https://cabecudos-back.herokuapp.com" : "http://localhost:4000";
 
 function createConfig(token) {
     const config = {
