@@ -7,19 +7,21 @@ import { useHistory } from "react-router";
 import UserContext from "../contexts/UserContext";
 import { closeSession } from "../services/Cabecudos";
 import { sendAlert } from "./shared/Alerts";
+import CartContext from "../contexts/CartContext";
 
 export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
     // const {avatar, token} = useContext(UserContext);
-    // const {cart} = useContext(CartContext);
+    const {cart} = useContext(CartContext);
     const avatar = null;
-    const cart = [];
+    const token = null;
     const history = useHistory();
 
     function relocate(whereTo) {
         history.push(whereTo);
         setShowDropDown(false);
     }
+    console.log(cart)
 
     function logoutHandler() {
         // closeSession(token)
@@ -42,7 +44,9 @@ export default function Menu() {
                 <Buttons>
                     <Cart onClick={() => relocate("/cart")}>
                         <RiShoppingCartLine />
-                        <Counter>{cart.length}</Counter>
+                        <Counter>
+                            {cart.map(item => item.qtd).reduce((prev, next) => prev + next)}
+                        </Counter>
                     </Cart>
                     <Avatar showDropDown={showDropDown} onClick={() => setShowDropDown(!showDropDown)}>
                         <img src={avatar||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
@@ -51,7 +55,7 @@ export default function Menu() {
                 </Buttons>
             </Wrapper>
             <DropDownMenu showDropDown={showDropDown} avatar={avatar}>
-                {avatar ? 
+                {token ? 
                     <p onClick={logoutHandler}>Sair</p> :
                     <>
                         <p onClick={() => relocate("/sign-in")}>Entrar</p>
