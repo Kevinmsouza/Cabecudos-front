@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import CartContext from "../../contexts/CartContext";
 import { getProducts } from "../../services/Cabecudos";
 import Card from "../shared/Card";
 import { PageStyle } from "../shared/styledComponents";
@@ -6,10 +7,11 @@ import { PageStyle } from "../shared/styledComponents";
 
 export default function Home () {
     const [products, setProducts] = useState(null)
+    const {cart} = useContext(CartContext)
 
     useEffect (() => {
         listProducts()
-    }, [])
+    }, [cart])
 
     function listProducts () {
         getProducts()
