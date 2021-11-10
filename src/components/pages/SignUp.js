@@ -55,7 +55,7 @@ export default function SignUp() {
                 </InputWrapper>
                 <ButtonsWrapper>
                     <PopButton type="submit">{ requesting ? "Cadastrando..." : "Cadastrar" }</PopButton>
-                    <p className="switch-sign">Já tem uma conta? Clique aqui para fazer o Login!</p>
+                    <p className="switch-sign" onClick={() => history.push('/sign-in')} >Já tem uma conta? Clique aqui para fazer o Login!</p>
                 </ButtonsWrapper>
             </SignStyles>
         </SignContainer>
