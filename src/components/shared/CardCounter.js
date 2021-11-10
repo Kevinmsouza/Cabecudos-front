@@ -1,14 +1,15 @@
 import { useEffect } from "react"
 import styled from "styled-components"
 
-export default function CardCounter ({value, setValue, isDisabled, stock}) {
+export default function CardCounter ({value, setValue, isDisabled, stock, vertical}) {
+
     useEffect(() => {
         if (value < 0) setValue(0)
         if (value > stock) setValue(stock)
     }, [value])
 
     return(
-        <CounterBox>
+        <CounterBox vertical={vertical}>
             <CounterButtom disabled={isDisabled} onClick={() => setValue(value-1)} >-</CounterButtom>
             <QtdBox
                 type='number'
@@ -23,8 +24,9 @@ export default function CardCounter ({value, setValue, isDisabled, stock}) {
 
 const CounterBox = styled.div`
     display: flex;
+    flex-direction: ${props => props.vertical? 'column' : 'row'};
     align-items: center;
-    gap: 10px;
+    gap: ${props => props.vertical? 0 : '10px'};;
 `;
 
 const QtdBox = styled.input`
@@ -52,6 +54,8 @@ const CounterButtom = styled.button`
     font-weight: 700;
     border: none;
     background-color: #ffffff;
+    display:flex;
+    text-align: center;
     &:disabled {
         color: lightgrey;
     }
