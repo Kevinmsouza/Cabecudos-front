@@ -112,6 +112,7 @@ const CardName = styled.p`
     font-size: 24px;
     line-height: 36px;
     letter-spacing: 0.01em;
+    color: #333333;
 `;
 
 const CardPrice = styled.div`
@@ -123,6 +124,7 @@ const CardPrice = styled.div`
     align-items: center;
     justify-content: center;
     letter-spacing: 0.01em;
+    color: #333333;
 `;
 
 const CardStock = styled.div`
