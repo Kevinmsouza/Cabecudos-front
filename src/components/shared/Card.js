@@ -10,7 +10,7 @@ export default function Card ({data}) {
     const [imgIndex, setImgIndex] = useState(0)
     const [counterValue, setCounterValue] = useState(stock <= 0 ? 0 : 1)
     const stockColor = stock <= 0 ? '#E44747' : stock <= 10 ? '#E4A647' : '#3EC453';
-    const {cart, setcart} = useContext(CartContext)
+    const {cart, setCart} = useContext(CartContext)
 
     function nextImg () {
         setImgIndex((imgIndex + 1) % images.length)
@@ -20,7 +20,7 @@ export default function Card ({data}) {
         if (counterValue <= 0) return
         const indexOfProduct = cart.map(e => e.id).indexOf(id)
         if (indexOfProduct < 0){
-            setcart([...cart, {id, qtd: counterValue}])
+            setCart([...cart, {id, qtd: counterValue}])
             sendAlert('success', '🛒 É pra já!', `
                 O produto foi adicionado ao seu carrinho!
                 Precione o icone de carrinho no menu para fazer o checkout
@@ -43,7 +43,7 @@ export default function Card ({data}) {
                 Você agora tem ${newCart[indexOfProduct].qtd} desses no carrinho!
             `)
             } 
-            setcart(newCart)
+            setCart(newCart)
         }
     }
 
