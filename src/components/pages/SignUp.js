@@ -15,7 +15,7 @@ export default function SignUp() {
 
     function register(e) {
         e.preventDefault();
-        if( !data.name || !data.password || !data.cpf || !confirmPassword || !data.email ) return alert('Preencha os campos obrigatórios!');
+        if( !data.name || !data.password || !data.cpf || !confirmPassword || !data.email ) return alert('Preencha os campos obrigatórios!'); // will change to sweetAlert()
         const { cpf, password, } = data;
         let trimmedCpf = cpf.replace(/[-|.]/g,'');
         if (password !== confirmPassword) {
