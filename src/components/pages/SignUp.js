@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
-import { SignContainer } from "../shared/styledComponents.js";
+import { SignContainer, FormLogo } from "../shared/styledComponents.js";
+import Logo from '../../assets/logo2.png';
 import { sendUserData } from "../../services/Cabecudos.js";
 import styled from "styled-components";
 
@@ -14,6 +15,7 @@ export default function SignUp() {
 
     function register(e) {
         e.preventDefault();
+        if( !data.name || !data.password || !data.cpf || !confirmPassword || !data.email ) return alert('Preencha os campos obrigatórios!');
         const { cpf, password, } = data;
         let trimmedCpf = cpf.replace(/[-|.]/g,'');
         if (password !== confirmPassword) {
@@ -42,6 +44,10 @@ export default function SignUp() {
 
     return(
         <SignContainer>
+            <FormLogo>
+                <img alt='logo' src={Logo} onClick={()=>history.push('/')} ></img>
+                <p onClick={register} >Cadastrar</p>
+            </FormLogo>
             <SignStyles onSubmit={register}>
                 <InputWrapper>
                     <PopInput placeholder="Nome" type="text" value={data.name} onChange={(e)=>setData({...data, name: e.target.value})} required ></PopInput>
@@ -101,7 +107,7 @@ const PopInput = styled.input`
 `
 
 const SignStyles=styled.form`
-    /* font-family: "Poppins", sans-serif; */
+    position: relative;
     width:100%;
     height: 75%;
     max-width: 500px;
