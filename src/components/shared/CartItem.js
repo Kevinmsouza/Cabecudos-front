@@ -14,21 +14,22 @@ export default function CartItem ({id, qtd, index}) {
 
     useEffect(getItemData , [])
 
+    useEffect(changeCart, [counterValue])
+
     function getItemData () {
         getProductById(id)
-            .then(res => setData(res.data))
+            .then(res => {
+                setData(res.data)
+                addPriceToCart(res.data[0].price)
+            })
             .catch(err => console.log(err))
     }
-
-    useEffect(changeCart, [counterValue])
 
     function changeCart () {
         let newCart = [...cart]
         if (counterValue === 0){
-            sendConfirm('warning', 'Tem certeza?', `
-                O produto foi adicionado ao seu carrinho!
-                Precione o icone de carrinho no menu para fazer o checkout
-                ou continue comprando!
+            sendConfirm('warning', '🥺 Tem certeza?', `
+                Quer mesmo remover esse item do carrinho? Ele parece tão sozinho aqui...
             `).then((result) => {
                 if (result.isConfirmed) {
                     setCart(newCart.filter(e => e.id !== id))
@@ -40,7 +41,12 @@ export default function CartItem ({id, qtd, index}) {
             newCart[index].qtd = counterValue
             setCart(newCart)
         }
-        
+    }
+
+    function addPriceToCart (price) {
+        let newCart = [...cart]
+        newCart[index] = {...cart[index], price: price}
+        setCart(newCart)
     }
 
     if (!name) return 'Loading...'

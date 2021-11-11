@@ -5,6 +5,7 @@ function sendAlert(type, title, text) {
         title: title,
         text: text,
         icon: type,
+        confirmButtonColor: '#3EA4C4',
       })
 }
 
