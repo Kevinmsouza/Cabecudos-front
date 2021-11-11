@@ -1,5 +1,6 @@
 import "./assets/reset.css";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import SignUp from "./components/pages/SignUp.js";
 import CartContext from "./contexts/CartContext";
 import Home from "./components/pages/Home";
 import Menu from "./components/Menu";
@@ -25,7 +26,7 @@ export default function App() {
         <CartContext.Provider value={{cart, setCart}}>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/sign-up" exact />
+                    <Route path="/sign-up" exact component={SignUp}/>
                     <Route path="/sign-in" exact />
                     <>
                         <Menu />

@@ -11,6 +11,10 @@ function createConfig(token) {
     return config;
 }
 
+function sendUserData(body) {
+    return axios.post(BASE_URL+"/sign-up", body);
+}
+
 function closeSession(token) {
     return axios.delete(`${BASE_URL}/sign-out`, createConfig(token));
 }
@@ -20,6 +24,7 @@ function getProducts () {
 }
 
 export {
+    sendUserData,
     closeSession,
     getProducts,
 }

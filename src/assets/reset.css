@@ -131,4 +131,10 @@ body {
     background-color: #f2f2f2;
     /* font-family: 'Luckiest Guy', cursive; */
     font-family: "Poppins", sans-serif;
+    
+}
+
+*::selection{
+    background: #3EA4C4;
+    color: #fff;
 }
