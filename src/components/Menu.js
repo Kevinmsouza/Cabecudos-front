@@ -24,14 +24,14 @@ export default function Menu() {
     console.log(cart)
 
     function logoutHandler() {
-        // closeSession(token)
-        // .then(res => {
-        //     localStorage.clear();
-        //     Location.reload();
-        // })
-        // .catch(err => {
-        //     sendAlert("error", "Oops... ;(", "Houve um problema para terminar a sessão, tente novamente.");
-        // })
+        closeSession(token)
+        .then(res => {
+            localStorage.clear();
+            Location.reload();
+        })
+        .catch(err => {
+            sendAlert("error", "Oops... ;(", "Houve um problema para terminar a sessão, tente novamente.");
+        })
     }
 
     return (
