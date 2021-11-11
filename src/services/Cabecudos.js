@@ -20,11 +20,16 @@ function closeSession(token) {
 }
 
 function getProducts () {
-    return axios.get(`${BASE_URL}/products`)
+    return axios.get(`${BASE_URL}/products`);
+}
+
+function getAddresses (token) {
+    return axios.get(`${BASE_URL}/addresses`, createConfig(token));
 }
 
 export {
     sendUserData,
     closeSession,
     getProducts,
+    getAddresses,
 }

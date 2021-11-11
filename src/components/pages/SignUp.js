@@ -80,7 +80,8 @@ const PopButton = styled.button`
     letter-spacing: 3px;
     color: #fff;
     background: #3EA4C4;
-`
+`;
+
 const PopInput = styled.input`
     font-family: inherit;
     border-radius: 6px;
@@ -92,7 +93,8 @@ const PopInput = styled.input`
     padding: 0px 10px;
     font-size: 14px;
     font-weight: 400;
-    `
+`;
+
 const InputWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -104,7 +106,8 @@ const InputWrapper = styled.div`
     height:72%;
     max-height: 400px;
     margin-bottom: 0px;
-`
+`;
+
 const SignStyles=styled.form`
     position: relative;
     width:100%;
@@ -123,7 +126,8 @@ const SignStyles=styled.form`
     @media(max-width: 370px){
         padding: 24px 16px;
     }
-`
+`;
+
 const ButtonsWrapper = styled.div`
     .switch-sign{
         margin-top: 30px;
@@ -140,4 +144,4 @@ const ButtonsWrapper = styled.div`
             font-size: 9.5px;
         }
     }
-`
+`;
