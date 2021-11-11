@@ -16,6 +16,9 @@ export default function CardCounter ({value, setValue, isDisabled, stock, vertic
                 value={value} 
                 disabled={isDisabled} 
                 onChange={e => {setValue(e.target.value)}}
+                onBlur={() => {
+                    if (value <= 0) setValue(0)
+                }}
             />
             <CounterButtom disabled={isDisabled} onClick={() => setValue(value+1)}  >+</CounterButtom>
         </CounterBox>

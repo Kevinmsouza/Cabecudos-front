@@ -24,7 +24,7 @@ export default function CartItem ({id, qtd, index}) {
 
     function changeCart () {
         let newCart = [...cart]
-        if (!counterValue){
+        if (counterValue === 0){
             sendConfirm('warning', 'Tem certeza?', `
                 O produto foi adicionado ao seu carrinho!
                 Precione o icone de carrinho no menu para fazer o checkout
