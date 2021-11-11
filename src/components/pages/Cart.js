@@ -9,6 +9,8 @@ import { PageStyle } from "../shared/styledComponents";
 
 export default function Cart () {
     const [products, setProducts] = useState(null)
+    const [defaultAddress, setDefaultAddress] = useState(null);
+    const [reload, setReload] = useState(false);
     const {cart} = useContext(CartContext)
 
     useEffect (() => {
@@ -30,9 +32,9 @@ export default function Cart () {
                 <CartItem data={products[0]} />
                 <CartItem data={products[0]} />
             </CartWrapper>
-            <Addresses />
+            <Addresses defaultAddress={defaultAddress} setDefaultAddress={setDefaultAddress} reload={reload} setReload={setReload}/>
         </PageStyle>
-    )
+    );
 }
 
 const CartWrapper = styled.div`

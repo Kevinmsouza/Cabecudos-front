@@ -104,6 +104,7 @@ const DropDownMenu = styled.div`
     z-index: 2;
     top: ${({showDropDown, avatar}) => showDropDown ? `50px` : avatar ? `20px` : `-15px`};    
     right: 0;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
     width: 100px;
     background: #FFFFFF;
     font-size: 13px;

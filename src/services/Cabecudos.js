@@ -23,8 +23,16 @@ function getProducts () {
     return axios.get(`${BASE_URL}/products`);
 }
 
-function getAddresses (token) {
+function getAddresses(token) {
     return axios.get(`${BASE_URL}/addresses`, createConfig(token));
+}
+
+function postAddress(token, body) {
+    return axios.post(`${BASE_URL}/addresses`, body, createConfig(token));
+}
+
+function deleteAddress(token, body) {
+    return axios.delete(`${BASE_URL}/addresses`, body, createConfig('b04c81bc-9701-4794-87fd-eafcd88650a5'));
 }
 
 export {
@@ -32,4 +40,6 @@ export {
     closeSession,
     getProducts,
     getAddresses,
+    postAddress,
+    deleteAddress,
 }
