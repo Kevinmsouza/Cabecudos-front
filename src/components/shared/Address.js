@@ -10,10 +10,6 @@ export default function Address({oldAddress, defaultAddress, setDefaultAddress, 
     const {address, postal_code, id, comp} = oldAddress;
 
     function deleteAddressHandler() {
-
-    }
-
-    function deleteAddressHandler() {
         sendConfirm('warning', 'Deseja remover esse endereço?')
         .then((result) => {
             if(result.isConfirmed) {
