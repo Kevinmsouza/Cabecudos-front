@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import CartContext from "../../contexts/CartContext";
+import UserContext from "../../contexts/UserContext";
 import { getProducts } from "../../services/Cabecudos";
 import Addresses from "../shared/Addresses";
 import CartItem from "../shared/CartItem";
@@ -8,6 +9,8 @@ import { PageStyle } from "../shared/styledComponents";
 
 
 export default function Cart () {
+    // const {token} = useContext(UserContext);
+    const token = "temp";
     const [products, setProducts] = useState(null)
     const [defaultAddress, setDefaultAddress] = useState(null);
     const [reload, setReload] = useState(false);
@@ -32,7 +35,7 @@ export default function Cart () {
                 <CartItem data={products[0]} />
                 <CartItem data={products[0]} />
             </CartWrapper>
-            <Addresses defaultAddress={defaultAddress} setDefaultAddress={setDefaultAddress} reload={reload} setReload={setReload}/>
+            {token?<Addresses defaultAddress={defaultAddress} setDefaultAddress={setDefaultAddress} reload={reload} setReload={setReload}/>:""}
         </PageStyle>
     );
 }

@@ -41,6 +41,7 @@ export default function Menu() {
         });
         return counter;
     }
+    
     return (
         <>
             <Wrapper>

@@ -5,18 +5,10 @@ import { deleteAddress } from "../../services/Cabecudos";
 export default function Address({oldAddress, defaultAddress, setDefaultAddress, reload, setReload}) {
     // const {token} = useContext(UserContext);
     const token = 'b04c81bc-9701-4794-87fd-eafcd88650a5';
-    const {
-        address,
-        postal_code,
-        id,
-        comp
-    } = oldAddress;
+    const {address, postal_code, id, comp} = oldAddress;
 
     function deleteAddressHandler() {
-        const body = {
-            adressId: id,
-        };
-        deleteAddress(token, body)
+        deleteAddress(token, id)
         .then(res => {
             setReload(!reload);
         })

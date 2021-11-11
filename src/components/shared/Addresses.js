@@ -5,6 +5,7 @@ import Address from "./Address";
 import { GrFormClose } from 'react-icons/gr';
 import { useContext } from "react/cjs/react.development";
 import UserContext from "../../contexts/UserContext";
+import { sendAlert } from "./Alerts";
 
 export default function Addresses({defaultAddress, setDefaultAddress, reload, setReload}) {
     // const {id, token} = useContext(UserContext);
@@ -13,8 +14,9 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
     const [postalCode, setPostalCode] = useState("");
     const [address, setAddress] = useState("");
     const [comp, setComp] = useState("");
-
+    const [loading, setLoading] = useState(false);
     const token = 'b04c81bc-9701-4794-87fd-eafcd88650a5';
+    
     useEffect(() => {
         getAddresses(token)
         .then(res => {
@@ -28,12 +30,15 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
 
     function newAddressHandler(e) {
         e.preventDefault();
+
         const body = {
             userId: 7,
             address,
             postalCode,
             comp: comp||"(sem complemento)",
         }
+
+        setLoading(true);
         postAddress(token, body)
         .then(res => {
             setReload(!reload);
@@ -41,8 +46,12 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
             setPostalCode("");
             setAddress("");
             setComp("");
+            setLoading(false);
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            sendAlert('error', 'Preencha os dados corretamente.', "CEP possui 8 caracteres, endereço deve conter rua e numero")
+            setLoading(false);
+        })
     }
 
     function onChangeHandler(e) {
@@ -51,7 +60,6 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
     }
 
     return (
-        <>
         <Wrapper>
             <Title>Endereço de entrega:</Title>
             {addresses.map(address => 
@@ -60,21 +68,20 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
             <Divider />
             {isFormOpen||<Button onClick={() => setIsFormOpen(true)}>Novo endereço</Button>}
             {isFormOpen ? 
-                <AddressForm onSubmit={newAddressHandler}>
+                <AddressForm onSubmit={newAddressHandler} loading={loading}>
                     <Close onClick={(e) => {e.preventDefault(); setIsFormOpen(false)}}><GrFormClose/></Close>
                     <p>CEP</p>
                     <Input type="number" maxlength="8" value={postalCode} onChange={onChangeHandler} placeholder="Ex: 85903-320"/>
                     <p>Endereço</p>
-                    <Input type="text" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: Rua Primavera, 285"/>
+                    <Input type="text" maxLength="40" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: Rua Primavera, 285"/>
                     <p>Complemento<span> (opcional)</span></p>
-                    <Input type="text" maxlength="30" value={comp} onChange={e => setComp(e.target.value)} placeholder="Apt. 14"/>
-                    <Button type="submit">Registrar endereço</Button>
+                    <Input type="text" maxLength="30" value={comp} onChange={e => setComp(e.target.value)} placeholder="Apt. 14"/>
+                    <Button loading={loading} type="submit">Registrar endereço</Button>
                 </AddressForm>
                 :
                 ""
             }
         </Wrapper>
-        </>
     );
 }
 
@@ -82,18 +89,20 @@ const Input = styled.input`
     line-height: 15px;
     margin-bottom: 15px;
     font-size: 16px;
-    padding: 5px;
+    padding: 5px 10px;
     outline: none;
+    border: 1px #333 solid;
+    border-radius: 3px;
 `;
 
-const Close = styled.button`
+const Close = styled.div`
     background: inherit;
     border: none;
     font-size: 30px;
-    right: 0;
-    top: 0;
+    width: 30px;
     font-weight: 700;
     text-align: right;
+    margin-left: 90%;
 `;
 
 const AddressForm = styled.form`
@@ -101,6 +110,11 @@ const AddressForm = styled.form`
     flex-direction: column;
     font-size: 16px;
     line-height: 20px;
+    pointer-events: ${({loading}) => loading?`none`:`initial`};
+    & input {
+        background-color: ${({loading}) => loading?`#e0e0e0`:`#ffffff`};
+        opacity: ${({loading}) => loading?`0.7`:`1`};
+    }
 `;
 
 const Button = styled.button`
@@ -110,6 +124,8 @@ const Button = styled.button`
     background: #3EA4C4;
     color: #ffffff;
     border-radius: 6px;
+    opacity: ${({loading}) => loading?`0.7`:`1`};
+
 `;
 
 const Divider = styled.div`
