@@ -1,14 +1,27 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components"
 import CardCounter from "./CardCounter";
 import CartContext from "../../contexts/CartContext"
+import { getProductById } from "../../services/Cabecudos";
 
 
-export default function CartItem ({data}) {
-    const {id, name, price, stock, images} = data;
+export default function CartItem ({id, qtd, index}) {
+    const [data, setData] = useState([{name: null}])
+    const {name, price, stock, images} = data[0];
     const {cart, setCart} = useContext(CartContext)
-    const indexOfProduct = cart.map(e => e.id).indexOf(id)
-    const [counterValue, setCounterValue] = useState(cart[indexOfProduct].qtd)
+    const [counterValue, setCounterValue] = useState(qtd)
+
+    useEffect(() => {
+        getItemData()
+    }, [])
+
+    function getItemData () {
+        getProductById(id)
+            .then(res => setData(res.data))
+            .catch(err => console.log(err))
+    }
+
+    if (!name) return 'Loading...'
 
     return(
         <CartItemSC>
@@ -18,12 +31,12 @@ export default function CartItem ({data}) {
                 <CartItemPrice>R${(price*counterValue/100).toFixed(2)}</CartItemPrice>
             </CartItemInfoBox>
             <CardCounter 
-                    value={counterValue} 
-                    setValue={setCounterValue} 
-                    isDisabled={stock <= 0} 
-                    stock={stock}
-                    vertical
-                />
+                value={counterValue} 
+                setValue={setCounterValue} 
+                isDisabled={stock <= 0} 
+                stock={stock}
+                vertical
+            />
         </CartItemSC>
     )
 }

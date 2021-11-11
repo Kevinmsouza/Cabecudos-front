@@ -1,31 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import CartContext from "../../contexts/CartContext";
-import { getProducts } from "../../services/Cabecudos";
 import CartItem from "../shared/CartItem";
 import { PageStyle } from "../shared/styledComponents";
 
 
 export default function Cart () {
-    const [products, setProducts] = useState(null)
     const {cart} = useContext(CartContext)
-
-    useEffect (() => {
-        listProducts()
-    }, [cart])
-
-    function listProducts () {
-        getProducts()
-            .then(res => setProducts(res.data))
-            .catch(err => console.log(err))
-    }
-
-    if (!products) return 'Loading...'
 
     return(
         <PageStyle>
             <CartWrapper>
-                <CartItem data={products[0]} />
+                {cart.map((e, i) => <CartItem key={e.id} id={e.id} qtd={e.qtd} index={i} />)}
             </CartWrapper>
         </PageStyle>
     )
