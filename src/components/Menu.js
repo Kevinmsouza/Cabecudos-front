@@ -34,6 +34,13 @@ export default function Menu() {
         })
     }
 
+    function cartCounter() {
+        let counter = 0;
+        cart.forEach(item => {
+            counter+= item.qtd;
+        });
+        return counter;
+    }
     return (
         <>
             <Wrapper>
@@ -45,7 +52,7 @@ export default function Menu() {
                     <Cart onClick={() => relocate("/cart")}>
                         <RiShoppingCartLine />
                         <Counter>
-                            {cart.map(item => item.qtd).reduce((prev, next) => prev + next)}
+                            {cartCounter()}
                         </Counter>
                     </Cart>
                     <Avatar showDropDown={showDropDown} onClick={() => setShowDropDown(!showDropDown)}>
