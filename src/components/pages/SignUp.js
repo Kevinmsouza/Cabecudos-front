@@ -69,18 +69,30 @@ export default function SignUp() {
 }
 
 const PopButton = styled.button`
+    font-family: inherit;
     width: 100%;
     height: 48px;
     border-radius: 15px;
     border: none;
     cursor: pointer;
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3px;
     color: #fff;
     background: #3EA4C4;
-    /* margin-top:100px; */
 `
-
+const PopInput = styled.input`
+    font-family: inherit;
+    border-radius: 6px;
+    height: 10%;
+    color: #555;
+    offset: none;
+    outline-style: none;
+    border: none;
+    padding: 0px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    `
 const InputWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -93,23 +105,11 @@ const InputWrapper = styled.div`
     max-height: 400px;
     margin-bottom: 0px;
 `
-
-const PopInput = styled.input`
-    border-radius: 6px;
-    height: 10%;
-    color: #3EA4C4;
-    offset: none;
-    outline-style: none;
-    border: none;
-    padding: 0px 10px;
-    font-size: 14px;
-    font-weight: 400;
-`
-
 const SignStyles=styled.form`
     position: relative;
     width:100%;
-    height: 75%;
+    height: 500px;
+    min-height: 480px;
     max-width: 500px;
     padding: 28px 24px;
     background: #fff;
