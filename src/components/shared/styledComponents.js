@@ -8,7 +8,8 @@ const SignContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-`
+`;
+
 const FormLogo = styled.div`
     width:100%;
     font-family: 'Luckiest Guy', cursive;
@@ -26,6 +27,7 @@ const FormLogo = styled.div`
         cursor: pointer;
     }
 `;
+
 const PageStyle = styled.article`
     margin: 65px 0;
     display: flex;
@@ -53,6 +55,6 @@ const CardButtom = styled.button`
 export { 
     PageStyle,
     CardButtom,
-  SignContainer,
-  FormLogo,
+    SignContainer,
+    FormLogo,
 };
