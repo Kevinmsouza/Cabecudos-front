@@ -91,8 +91,9 @@ const Input = styled.input`
     font-size: 16px;
     padding: 5px 10px;
     outline: none;
-    border: 1px #333 solid;
+    border: 1px black solid;
     border-radius: 3px;
+    color: #333;
 `;
 
 const Close = styled.div`

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { BsFillTrashFill } from 'react-icons/bs';
 import { deleteAddress } from "../../services/Cabecudos";
+import Swal from 'sweetalert2'
+import { sendConfirm } from "./Alerts";
 
 export default function Address({oldAddress, defaultAddress, setDefaultAddress, reload, setReload}) {
     // const {token} = useContext(UserContext);
@@ -8,22 +10,35 @@ export default function Address({oldAddress, defaultAddress, setDefaultAddress, 
     const {address, postal_code, id, comp} = oldAddress;
 
     function deleteAddressHandler() {
-        deleteAddress(token, id)
-        .then(res => {
-            setReload(!reload);
-        })
-        .catch(err => {
-            alert(err);
+
+    }
+
+    function deleteAddressHandler() {
+        sendConfirm('warning', 'Deseja remover esse endereço?')
+        .then((result) => {
+            if(result.isConfirmed) {
+                deleteAddress(token, id)
+                .then(res => {
+                    setReload(!reload);
+                })
+                .catch(err => {
+                    alert(err);
+                });
+            } else if(result.isDenied) {
+                return;
+            }
         });
     }
     
     return (
         <AddressOption >
+            <div onClick={() => setDefaultAddress(id)}>
             <CheckCircle chosen={defaultAddress === id} onClick={() => setDefaultAddress(id)}/>
             <InfoWrapper>
                 <Info>{postal_code}, {address}</Info><br/>
                 <Info>{comp||"(sem complemento)"}</Info>
             </InfoWrapper>
+            </div>
             <Close onClick={deleteAddressHandler}><BsFillTrashFill/></Close>
         </AddressOption>
     );
@@ -60,11 +75,13 @@ const InfoWrapper = styled.p`
 `;
 
 const AddressOption = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
     position: relative;
+    & div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
 `;
 
 const CheckCircle = styled.div`
