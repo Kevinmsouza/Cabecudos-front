@@ -6,6 +6,7 @@ import { GrFormClose } from 'react-icons/gr';
 import { useContext } from "react/cjs/react.development";
 import UserContext from "../../contexts/UserContext";
 import { sendAlert } from "./Alerts";
+import Loader from "react-loader-spinner";
 
 export default function Addresses({defaultAddress, setDefaultAddress, reload, setReload}) {
     // const {id, token} = useContext(UserContext);
@@ -49,7 +50,9 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
             setLoading(false);
         })
         .catch(err => {
-            sendAlert('error', 'Preencha os dados corretamente.', "CEP possui 8 caracteres, endereço deve conter rua e numero")
+            if(postalCode.length<8) sendAlert('error', 'Preencha os dados corretamente.', "CEP deve ter 8 caracteres");
+            else sendAlert('error', 'Preencha os dados corretamente.', "Endereço deve possuir rua e numero");
+
             setLoading(false);
         })
     }
@@ -76,7 +79,7 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
                     <Input type="text" maxLength="40" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: Rua Primavera, 285"/>
                     <p>Complemento<span> (opcional)</span></p>
                     <Input type="text" maxLength="30" value={comp} onChange={e => setComp(e.target.value)} placeholder="Apt. 14"/>
-                    <Button loading={loading} type="submit">Registrar endereço</Button>
+                    <Button loading={loading} type="submit">{loading ? <Loader type="ThreeDots" color="#FFFFFF" height={13} /> : `Registrar endereço`}</Button>
                 </AddressForm>
                 :
                 ""
@@ -114,7 +117,7 @@ const AddressForm = styled.form`
     pointer-events: ${({loading}) => loading?`none`:`initial`};
     & input {
         background-color: ${({loading}) => loading?`#e0e0e0`:`#ffffff`};
-        opacity: ${({loading}) => loading?`0.7`:`1`};
+        opacity: ${({loading}) => loading?`0.4`:`1`};
     }
 `;
 
@@ -149,7 +152,7 @@ const Wrapper = styled.div`
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
-    padding: 10px;
+    padding: 15px;
     font-family: "Poppins", sans-serif;
     display: flex;
     flex-direction: column;

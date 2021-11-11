@@ -4,6 +4,7 @@ import CartContext from "../../contexts/CartContext";
 import UserContext from "../../contexts/UserContext";
 import { getProducts } from "../../services/Cabecudos";
 import Addresses from "../shared/Addresses";
+import { paymentAlert } from "../shared/Alerts";
 import CartItem from "../shared/CartItem";
 import { PageStyle } from "../shared/styledComponents";
 
@@ -17,7 +18,7 @@ export default function Cart () {
     const {cart} = useContext(CartContext)
 
     useEffect (() => {
-        listProducts()
+        listProducts();
     }, [cart])
 
     function listProducts () {
