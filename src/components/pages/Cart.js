@@ -26,8 +26,6 @@ export default function Cart () {
         <PageStyle>
             <CartWrapper>
                 <CartItem data={products[0]} />
-                <CartItem data={products[0]} />
-                <CartItem data={products[0]} />
             </CartWrapper>
         </PageStyle>
     )

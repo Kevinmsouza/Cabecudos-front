@@ -6,8 +6,9 @@ import CartContext from "../../contexts/CartContext"
 
 export default function CartItem ({data}) {
     const {id, name, price, stock, images} = data;
-    const [counterValue, setCounterValue] = useState(stock <= 0 ? 0 : 1)
     const {cart, setCart} = useContext(CartContext)
+    const indexOfProduct = cart.map(e => e.id).indexOf(id)
+    const [counterValue, setCounterValue] = useState(cart[indexOfProduct].qtd)
 
     return(
         <CartItemSC>
