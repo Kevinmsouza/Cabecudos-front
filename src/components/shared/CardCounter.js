@@ -24,7 +24,7 @@ export default function CardCounter ({value, setValue, isDisabled, stock, vertic
 
 const CounterBox = styled.div`
     display: flex;
-    flex-direction: ${props => props.vertical? 'column' : 'row'};
+    flex-direction: ${props => props.vertical? 'column-reverse' : 'row'};
     align-items: center;
     gap: ${props => props.vertical? 0 : '10px'};;
 `;
