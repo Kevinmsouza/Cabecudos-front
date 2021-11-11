@@ -28,11 +28,13 @@ export default function CartItem ({data}) {
 }
 
 const CartItemSC = styled.div`
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 0 5px;
-background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    background-color: #ffffff;
+    border-bottom: 1px solid lightgray;
+
 `;
 
 const CartItemImg = styled.img`
