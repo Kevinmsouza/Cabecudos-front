@@ -46,6 +46,11 @@ const QtdBox = styled.input`
     &:disabled {
         background-color: lightgrey;
     }
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 `;
 
 const CounterButtom = styled.button`

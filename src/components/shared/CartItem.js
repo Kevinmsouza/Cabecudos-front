@@ -3,6 +3,7 @@ import styled from "styled-components"
 import CardCounter from "./CardCounter";
 import CartContext from "../../contexts/CartContext"
 import { getProductById } from "../../services/Cabecudos";
+import { sendConfirm } from "./Alerts";
 
 
 export default function CartItem ({id, qtd, index}) {
@@ -11,14 +12,35 @@ export default function CartItem ({id, qtd, index}) {
     const {cart, setCart} = useContext(CartContext)
     const [counterValue, setCounterValue] = useState(qtd)
 
-    useEffect(() => {
-        getItemData()
-    }, [])
+    useEffect(getItemData , [])
 
     function getItemData () {
         getProductById(id)
             .then(res => setData(res.data))
             .catch(err => console.log(err))
+    }
+
+    useEffect(changeCart, [counterValue])
+
+    function changeCart () {
+        let newCart = [...cart]
+        if (!counterValue){
+            sendConfirm('warning', 'Tem certeza?', `
+                O produto foi adicionado ao seu carrinho!
+                Precione o icone de carrinho no menu para fazer o checkout
+                ou continue comprando!
+            `).then((result) => {
+                if (result.isConfirmed) {
+                    setCart(newCart.filter(e => e.id !== id))
+                } else {
+                    setCounterValue(counterValue + 1)
+                }
+              })
+        } else {
+            newCart[index].qtd = counterValue
+            setCart(newCart)
+        }
+        
     }
 
     if (!name) return 'Loading...'
