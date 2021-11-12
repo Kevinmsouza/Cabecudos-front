@@ -16,7 +16,7 @@ export default function SignIn() {
 
     function login(e) {
         e.preventDefault();
-        if (!data.email || !data.password) return sendAlert('error', ':( Oops!', 'Todos os campos devem ser preenchidos!'); // will change to sweetAlert
+        if (!data.email || !data.password) return sendAlert('error', 'Opa! :(', 'Os campos devem estar preenchidos!'); // will change to sweetAlert
         setRequesting(true);
         getUserData(data)
         .then(answer => {

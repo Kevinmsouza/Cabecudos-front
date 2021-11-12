@@ -38,6 +38,7 @@ export default function SignUp() {
         .catch(answer => {
             console.log(answer.response);
             setRequesting(false);
+            sendAlert('error', 'Opa :(', answer.response.data);
             setData({ ...data, password:"", });
             setConfirmPassword("");
         });
