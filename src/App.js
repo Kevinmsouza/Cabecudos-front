@@ -1,13 +1,16 @@
 import "./assets/reset.css";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import SignUp from "./components/pages/SignUp.js";
-import CartContext from "./contexts/CartContext";
-import Home from "./components/pages/Home";
-import Menu from "./components/Menu";
 import { useEffect, useState } from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import CartContext from "./contexts/CartContext.js";
+import SignUp from "./components/pages/SignUp.js";
+import SignIn from "./components/pages/SignIn.js";
+import Home from "./components/pages/Home.js";
+import Menu from "./components/Menu.js";
+import UserContext from "./contexts/UserContext";
 
 export default function App() {
     const [cart, setCart] = useState([]);
+    const [user, setUser] = useState({});
 
     // Gets cart info from local storage if possible
     useEffect(() => {
@@ -22,11 +25,12 @@ export default function App() {
     }, [cart])
 
     return (
+        <UserContext.Provider value={{user, setUser}}>
         <CartContext.Provider value={{cart, setCart}}>
             <BrowserRouter>
                 <Switch>
                     <Route path="/sign-up" exact component={SignUp}/>
-                    <Route path="/sign-in" exact />
+                    <Route path="/sign-in" exact component={SignIn}/>
                     <>
                         <Menu />
                         <Route path="/" exact>
@@ -40,5 +44,6 @@ export default function App() {
                 </Switch>
             </BrowserRouter>
         </CartContext.Provider>
+        </UserContext.Provider>
     );
 }

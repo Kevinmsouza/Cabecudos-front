@@ -5,14 +5,15 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import UserContext from "../contexts/UserContext";
+import CartContext from "../contexts/CartContext";
 import { closeSession } from "../services/Cabecudos";
 import { sendAlert } from "./shared/Alerts";
 
 export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
-    // const {avatar, token} = useContext(UserContext);
-    // const {cart} = useContext(CartContext);
-    const avatar = null;
+    // const { image, token } = useContext(UserContext);
+    // const { cart } = useContext(CartContext);
+    const image = null;
     const cart = [];
     const history = useHistory();
 
@@ -45,13 +46,13 @@ export default function Menu() {
                         <Counter>{cart.length}</Counter>
                     </Cart>
                     <Avatar showDropDown={showDropDown} onClick={() => setShowDropDown(!showDropDown)}>
-                        <img src={avatar||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
+                        <img src={image||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
                         <IoIosArrowDown />
                     </Avatar>
                 </Buttons>
             </Wrapper>
-            <DropDownMenu showDropDown={showDropDown} avatar={avatar}>
-                {avatar ? 
+            <DropDownMenu showDropDown={showDropDown} image={image}>
+                {image ? 
                     <p onClick={logoutHandler}>Sair</p> :
                     <>
                         <p onClick={() => relocate("/sign-in")}>Entrar</p>
@@ -91,7 +92,7 @@ const Blank = styled.div`
 const DropDownMenu = styled.div`
     position: fixed;
     z-index: 2;
-    top: ${({showDropDown, avatar}) => showDropDown ? `50px` : avatar ? `20px` : `-15px`};    
+    top: ${({showDropDown, image}) => showDropDown ? `50px` : image ? `20px` : `-15px`};    
     right: 0;
     width: 100px;
     background: #FFFFFF;
