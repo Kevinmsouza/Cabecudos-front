@@ -23,8 +23,13 @@ function getProducts () {
     return axios.get(`${BASE_URL}/products`)
 }
 
+function getProductById (id) {
+    return axios.get(`${BASE_URL}/products/${id}`)
+}
+
 export {
     sendUserData,
     closeSession,
     getProducts,
+    getProductById,
 }

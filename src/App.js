@@ -5,6 +5,7 @@ import CartContext from "./contexts/CartContext";
 import Home from "./components/pages/Home";
 import Menu from "./components/Menu";
 import { useEffect, useState } from "react";
+import Cart from "./components/pages/Cart";
 
 export default function App() {
     const [cart, setCart] = useState([]);
@@ -32,7 +33,9 @@ export default function App() {
                         <Route path="/" exact>
                             <Home />
                         </Route>
-                        <Route path="/cart" exact />
+                        <Route path="/cart" exact >
+                            <Cart />
+                        </Route>
                     </>
                     <Route path="*">
                         <Redirect to="/" />
