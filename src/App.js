@@ -1,12 +1,13 @@
 import "./assets/reset.css";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import CartContext from "./contexts/CartContext.js";
 import SignUp from "./components/pages/SignUp.js";
 import SignIn from "./components/pages/SignIn.js";
 import Home from "./components/pages/Home.js";
 import Menu from "./components/Menu.js";
+import Cart from "./components/pages/Cart";
 import UserContext from "./contexts/UserContext";
+import CartContext from "./contexts/CartContext";
 
 export default function App() {
     const [cart, setCart] = useState([]);
@@ -36,7 +37,9 @@ export default function App() {
                         <Route path="/" exact>
                             <Home />
                         </Route>
-                        <Route path="/cart" exact />
+                        <Route path="/cart" exact >
+                            <Cart />
+                        </Route>
                     </>
                     <Route path="*">
                         <Redirect to="/" />
