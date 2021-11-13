@@ -15,8 +15,9 @@ export default function SignIn() {
     const history = useHistory();
 
     function login(e) {
+        if (requesting) return;
         e.preventDefault();
-        if (!data.email || !data.password) return sendAlert('error', 'Opa! :(', 'Os campos devem estar preenchidos!'); // will change to sweetAlert
+        if (!data.email || !data.password) return sendAlert('error', 'Opa! :(', 'Os campos devem estar preenchidos!');
         setRequesting(true);
         getUserData(data)
         .then(answer => {
@@ -36,17 +37,17 @@ export default function SignIn() {
     return (
         <SignContainer>
             <FormLogo log="in">
-                <img alt='logo' src={Logo} onClick={()=>history.push('/')} ></img>
+                <img alt='logo' src={Logo} onClick={()=>requesting ? '' : history.push('/')} ></img>
                 <p onClick={login} >Entrar</p>
             </FormLogo>
-            <SignStyles onSubmit={login} >
+            <SignStyles disabled={requesting} onSubmit={login} >
                 <InputWrapper>
-                    <PopInput placeholder="Email" type="email" value={data.email} onChange={(e)=>setData({...data, email: e.target.value})} required ></PopInput>
-                    <PopInput placeholder="Senha" type="password" value={data.password} onChange={(e)=>setData({...data, password: e.target.value})} required ></PopInput>
+                    <PopInput placeholder="Email" disabled={requesting} type="email" value={data.email} onChange={(e)=>setData({...data, email: e.target.value})} required ></PopInput>
+                    <PopInput placeholder="Senha" disabled={requesting} type="password" value={data.password} onChange={(e)=>setData({...data, password: e.target.value})} required ></PopInput>
                 </InputWrapper>
                 <ButtonsWrapper>
-                    <PopButton type="submit" >{ requesting ? "Entrando..." : "Entrar" }</PopButton>
-                    <p className="switch-sign" onClick={() => history.push('/sign-up')} >Primeira vez? Cadastre-se! </p>
+                    <PopButton disabled={requesting} type="submit" >{ requesting ? "Entrando..." : "Entrar" }</PopButton>
+                    <p className="switch-sign" onClick={() => requesting ? '' : history.push('/sign-up')} >Primeira vez? Cadastre-se! </p>
                 </ButtonsWrapper>
             </SignStyles>
         </SignContainer>
@@ -138,4 +139,3 @@ const ButtonsWrapper = styled.div`
         }
     }
 `;
-// delete this line later
