@@ -20,7 +20,7 @@ export default function Card ({data}) {
         if (counterValue <= 0) return
         const indexOfProduct = cart.map(e => e.id).indexOf(id)
         if (indexOfProduct < 0){
-            setCart([...cart, {id, qtd: counterValue}])
+            setCart([...cart, {id, qtd: counterValue, price}])
             sendAlert('success', '🛒 É pra já!', `
                 O produto foi adicionado ao seu carrinho!
                 Precione o icone de carrinho no menu para fazer o checkout
