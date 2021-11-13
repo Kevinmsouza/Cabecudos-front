@@ -6,7 +6,7 @@ export default function CardCounter ({value, setValue, isDisabled, stock, vertic
     useEffect(() => {
         if (value < 0) setValue(0)
         if (value > stock) setValue(stock)
-    }, [value])
+    }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return(
         <CounterBox vertical={vertical}>

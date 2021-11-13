@@ -15,12 +15,16 @@ function sendUserData(body) {
     return axios.post(BASE_URL+"/sign-up", body);
 }
 
+function getUserData(body) {
+    return axios.post(BASE_URL+"/sign-in", body);
+}
+
 function closeSession(token) {
     return axios.delete(`${BASE_URL}/sign-out`, createConfig(token));
 }
 
 function getProducts () {
-    return axios.get(`${BASE_URL}/products`)
+    return axios.get(`${BASE_URL}/products`);
 }
 
 function getProductById (id) {
@@ -28,6 +32,7 @@ function getProductById (id) {
 }
 
 export {
+    getUserData,
     sendUserData,
     closeSession,
     getProducts,
