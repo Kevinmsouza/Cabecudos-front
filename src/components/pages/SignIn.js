@@ -30,7 +30,7 @@ export default function SignIn() {
             console.log(answer.response);
             setRequesting(false);
             setData({ ...data, password:"", });
-            sendAlert('error', ':( Oops!', 'Usuario e/ou senha incorreto(s)');
+            sendAlert('error', 'Oops! :(', 'Usuario e/ou senha incorreto(s)');
         });    
     }
 
