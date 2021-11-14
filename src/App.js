@@ -10,16 +10,17 @@ import Home from "./components/pages/Home";
 import Menu from "./components/Menu";
 
 export default function App() {
-    const [cart, setCart] = useState([]);
-    const [user, setUser] = useState({});
-
+    const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart"))||[]);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
+    console.log(user);
+    console.log(cart);
     // Gets cart info from local storage if possible
-    useEffect(() => {
-        const localCart = localStorage.getItem("cart");
-        if (localCart) {
-            setCart(JSON.parse(localCart));
-        }
-    }, [])
+    // useEffect(() => {
+    //     const localCart = localStorage.getItem("cart");
+    //     if (localCart) {
+    //         setCart(JSON.parse(localCart));
+    //     }
+    // }, []);
 
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -27,26 +28,26 @@ export default function App() {
 
     return (
         <UserContext.Provider value={{user, setUser}}>
-        <CartContext.Provider value={{cart, setCart}}>
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/sign-up" exact component={SignUp}/>
-                    <Route path="/sign-in" exact component={SignIn}/>
-                    <>
-                        <Menu />
-                        <Route path="/" exact>
-                            <Home />
+            <CartContext.Provider value={{cart, setCart}}>
+                <BrowserRouter>
+                    <Switch>
+                        <Route path="/sign-up" exact component={SignUp}/>
+                        <Route path="/sign-in" exact component={SignIn}/>
+                        <>
+                            <Menu />
+                            <Route path="/" exact>
+                                <Home />
+                            </Route>
+                            <Route path="/cart" exact >
+                                <Cart />
+                            </Route>
+                        </>
+                        <Route path="*">
+                            <Redirect to="/" />
                         </Route>
-                        <Route path="/cart" exact >
-                            <Cart />
-                        </Route>
-                    </>
-                    <Route path="*">
-                        <Redirect to="/" />
-                    </Route>
-                </Switch>
-            </BrowserRouter>
-        </CartContext.Provider>
+                    </Switch>
+                </BrowserRouter>
+            </CartContext.Provider>
         </UserContext.Provider>
     );
 }

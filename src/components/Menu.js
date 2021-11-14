@@ -12,26 +12,26 @@ import { sendAlert } from "./shared/Alerts";
 export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
     const {cart} = useContext(CartContext);
-    const token = null;
-    // const { image, token } = useContext(UserContext);
-    const image = null;
+    const { user} = useContext(UserContext);
+    const [reload, setReload] = useState(false);
     const history = useHistory();
+    console.log(user)
 
     function relocate(whereTo) {
         history.push(whereTo);
         setShowDropDown(false);
     }
-    console.log(cart)
 
     function logoutHandler() {
-        closeSession(token)
+        closeSession(user.token)
         .then(res => {
             localStorage.clear();
-            Location.reload();
+            // Location.reload();
+            setReload(!reload);
         })
         .catch(err => {
             sendAlert("error", "Oops... ;(", "Houve um problema para terminar a sessão, tente novamente.");
-        })
+        });
     }
 
     function cartCounter() {
@@ -57,13 +57,13 @@ export default function Menu() {
                         </Counter>
                     </Cart>
                     <Avatar showDropDown={showDropDown} onClick={() => setShowDropDown(!showDropDown)}>
-                        <img src={image||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
+                        <img src={user.image||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
                         <IoIosArrowDown />
                     </Avatar>
                 </Buttons>
             </Wrapper>
-            <DropDownMenu showDropDown={showDropDown} image={image}>
-                {image ? 
+            <DropDownMenu showDropDown={showDropDown} token={user.token}>
+                {user.token ? 
                     <p onClick={logoutHandler}>Sair</p> :
                     <>
                         <p onClick={() => relocate("/sign-in")}>Entrar</p>
@@ -103,7 +103,7 @@ const Blank = styled.div`
 const DropDownMenu = styled.div`
     position: fixed;
     z-index: 2;
-    top: ${({showDropDown, image}) => showDropDown ? `50px` : image ? `20px` : `-15px`};    
+    top: ${({showDropDown, token}) => showDropDown ? `50px` : token ? `20px` : `-15px`};    
     right: 0;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
     width: 100px;
@@ -133,6 +133,8 @@ const Avatar = styled.div`
     padding-right: 8px;
     & img {
         width: 28px;
+        border-radius: 100px;
+        object-fit: cover;
     }
     svg {
         transform: rotate(${({showDropDown}) => showDropDown ? `180deg` : `0deg`});

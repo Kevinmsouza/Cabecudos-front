@@ -1,12 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import CartContext from "../../contexts/CartContext";
 import UserContext from "../../contexts/UserContext";
-import { getProducts } from "../../services/Cabecudos";
 import Addresses from "../shared/Addresses";
 import CartItem from "../shared/CartItem";
 import { PageStyle } from "../shared/styledComponents";
-
 
 export default function Cart () {
     // const {token} = useContext(UserContext);
