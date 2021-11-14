@@ -11,7 +11,7 @@ export default function OrderCard({order}) {
     const formattedDate = date.split('T')[0].split('-')[2] + '/' + date.split('T')[0].split('-')[1] + '/' + date.split('T')[0].split('-')[0];
     return (
         <Wrapper>
-            <InfoLine>Pedido #{id}</InfoLine>
+            <InfoLine>Pedido <span>#{id}</span></InfoLine>
             <InfoLine>Data: <span>{formattedDate}</span></InfoLine>
             <InfoLine>Endereço de entrega: <span>{address}, {comp === '(Sem complemento)' ? "" : comp}</span></InfoLine>
             <InfoLine>Valor total: <span>R$ {(total_price/100).toFixed(2)}</span></InfoLine>
@@ -25,6 +25,9 @@ const InfoLine = styled.p`
     :nth-child(1) {
         font-weight: 700;
         font-size: 18px;
+        span {
+            color: #00A4C5;
+        }
     }
     :nth-child(2) {
         span {

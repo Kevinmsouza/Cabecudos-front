@@ -47,6 +47,7 @@ const Close = styled.button`
     background: inherit;
     border: none;
     font-size: 15px;
+    opacity: 0.3;
 `;
 
 const Info = styled.span`
