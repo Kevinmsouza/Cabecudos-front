@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { BsFillTrashFill } from 'react-icons/bs';
 import { deleteAddress } from "../../services/Cabecudos";
 import { sendAlert, sendConfirm } from "./Alerts";
-import { useContext } from "react/cjs/react.development";
+import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 
 export default function Address({oldAddress, defaultAddress, setDefaultAddress, reload, setReload}) {

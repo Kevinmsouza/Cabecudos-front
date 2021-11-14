@@ -130,6 +130,7 @@ const Avatar = styled.div`
     padding-right: 8px;
     & img {
         width: 28px;
+        height: 28px;
         border-radius: 100px;
         object-fit: cover;
     }
