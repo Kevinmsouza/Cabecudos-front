@@ -40,7 +40,11 @@ function deleteAddress(token, id) {
 }
 
 function getProductById (id) {
-    return axios.get(`${BASE_URL}/products/${id}`)
+    return axios.get(`${BASE_URL}/products/${id}`);
+}
+
+function getOrders (token, userId) {
+    return axios.get(`${BASE_URL}/purchases/${userId}`, createConfig(token));
 }
 
 export {
@@ -52,4 +56,5 @@ export {
     postAddress,
     deleteAddress,
     getProductById,
+    getOrders,
 }

@@ -26,7 +26,7 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
         .catch(err => {
             console.log(err);
         });
-    },[setDefaultAddress, reload]);
+    },[setDefaultAddress, reload, user.token]);
 
     function newAddressHandler(e) {
         e.preventDefault();
@@ -49,10 +49,9 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
             setLoading(false);
         })
         .catch(err => {
+            setLoading(false);
             if(postalCode.length<8) sendAlert('error', 'Preencha os dados corretamente.', "CEP deve ter 8 caracteres");
             else sendAlert('error', 'Preencha os dados corretamente.', "Endereço deve possuir rua e numero");
-
-            setLoading(false);
         })
     }
 
