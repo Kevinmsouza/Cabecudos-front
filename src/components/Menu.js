@@ -61,7 +61,11 @@ export default function Menu() {
             </Wrapper>
             <DropDownMenu showDropDown={showDropDown} token={user.token}>
                 {user.token ? 
-                    <p onClick={logoutHandler}>Sair</p> :
+                    <>
+                        <p onClick={() => relocate("/history")}>Histórico</p>
+                        <p onClick={logoutHandler}>Sair</p>
+                    </>
+                    :
                     <>
                         <p onClick={() => relocate("/sign-in")}>Entrar</p>
                         <p onClick={() => relocate("/sign-up")}>Cadastrar</p>
@@ -100,7 +104,7 @@ const Blank = styled.div`
 const DropDownMenu = styled.div`
     position: fixed;
     z-index: 2;
-    top: ${({showDropDown, token}) => showDropDown ? `50px` : token ? `20px` : `-15px`};    
+    top: ${({showDropDown, token}) => showDropDown ? `50px` : token ? `-15px` : `-15px`};    
     right: 0;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
     width: 100px;
