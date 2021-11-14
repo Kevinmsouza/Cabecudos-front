@@ -1,24 +1,24 @@
 import styled from "styled-components";
 import { BsFillTrashFill } from 'react-icons/bs';
 import { deleteAddress } from "../../services/Cabecudos";
-import Swal from 'sweetalert2'
-import { sendConfirm } from "./Alerts";
+import { sendAlert, sendConfirm } from "./Alerts";
+import { useContext } from "react/cjs/react.development";
+import UserContext from "../../contexts/UserContext";
 
 export default function Address({oldAddress, defaultAddress, setDefaultAddress, reload, setReload}) {
-    // const {token} = useContext(UserContext);
-    const token = 'b04c81bc-9701-4794-87fd-eafcd88650a5';
+    const {user} = useContext(UserContext);
     const {address, postal_code, id, comp} = oldAddress;
 
     function deleteAddressHandler() {
         sendConfirm('warning', 'Deseja remover esse endereço?')
         .then((result) => {
             if(result.isConfirmed) {
-                deleteAddress(token, id)
+                deleteAddress(user.token, id)
                 .then(res => {
                     setReload(!reload);
                 })
                 .catch(err => {
-                    alert(err);
+                    sendAlert('error', 'Oops... ;(', 'Houve um erro ao remover este endereço, tente novamente.')
                 });
             } else if(result.isDenied) {
                 return;

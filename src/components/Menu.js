@@ -13,9 +13,7 @@ export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
     const {cart} = useContext(CartContext);
     const { user} = useContext(UserContext);
-    const [reload, setReload] = useState(false);
     const history = useHistory();
-    console.log(user)
 
     function relocate(whereTo) {
         history.push(whereTo);
@@ -25,9 +23,8 @@ export default function Menu() {
     function logoutHandler() {
         closeSession(user.token)
         .then(res => {
-            localStorage.clear();
-            // Location.reload();
-            setReload(!reload);
+            localStorage.removeItem("user");
+            window.location.reload();
         })
         .catch(err => {
             sendAlert("error", "Oops... ;(", "Houve um problema para terminar a sessão, tente novamente.");

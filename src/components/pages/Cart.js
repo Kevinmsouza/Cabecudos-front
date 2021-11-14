@@ -7,8 +7,7 @@ import CartItem from "../shared/CartItem";
 import { PageStyle } from "../shared/styledComponents";
 
 export default function Cart () {
-    // const {token} = useContext(UserContext);
-    const token = null;
+    const {user} = useContext(UserContext);
     const [defaultAddress, setDefaultAddress] = useState(null);
     const [reload, setReload] = useState(false);
     const {cart} = useContext(CartContext)
@@ -35,7 +34,7 @@ export default function Cart () {
                 }
                 <TotalPrice><p>Total: </p> <PriceSpan>R$ {calcTotal().toFixed(2)}</PriceSpan></TotalPrice>
             </CartWrapper>
-            {token?<Addresses defaultAddress={defaultAddress} setDefaultAddress={setDefaultAddress} reload={reload} setReload={setReload}/>:""}
+            {user.token?<Addresses defaultAddress={defaultAddress} setDefaultAddress={setDefaultAddress} reload={reload} setReload={setReload}/>:""}
         </PageStyle>
     )
 }

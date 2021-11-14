@@ -10,16 +10,16 @@ import Loader from "react-loader-spinner";
 
 export default function Addresses({defaultAddress, setDefaultAddress, reload, setReload}) {
     // const {id, token} = useContext(UserContext);
+    const {user} = useContext(UserContext);
     const [addresses, setAddresses] = useState([]);
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [postalCode, setPostalCode] = useState("");
     const [address, setAddress] = useState("");
     const [comp, setComp] = useState("");
     const [loading, setLoading] = useState(false);
-    const token = 'b04c81bc-9701-4794-87fd-eafcd88650a5';
     
     useEffect(() => {
-        getAddresses(token)
+        getAddresses(user.token)
         .then(res => {
             setAddresses(res.data);
             setDefaultAddress(res.data[0].id);
@@ -33,14 +33,14 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
         e.preventDefault();
 
         const body = {
-            userId: 7,
+            userId: user.id,
             address,
             postalCode,
             comp: comp||"(sem complemento)",
         }
 
         setLoading(true);
-        postAddress(token, body)
+        postAddress(user.token, body)
         .then(res => {
             setReload(!reload);
             setIsFormOpen(false);
