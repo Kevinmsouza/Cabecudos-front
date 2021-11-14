@@ -23,8 +23,6 @@ export default function History() {
         })
     }, [user.id, user.token])
 
-    console.log(orders);
-
     if (pageLoad) return <PageStyle>Loading...</PageStyle>
 
     return (
@@ -33,7 +31,7 @@ export default function History() {
             {orders.length ?
                 orders.map(order => <OrderCard order={order} key={order.id}/>) :
                 user.token ? 
-                <EmptyMsg>Você ainda não possui nenhuma compra, clique <Link to="/">aqui</Link> para ver nosso produtos :)</EmptyMsg> :
+                <EmptyMsg>Você ainda não possui nenhuma compra, clique <Link to="/">aqui</Link> para ver nossos produtos :)</EmptyMsg> :
                 <EmptyMsg>
                     Você precisa estar logado para ver seus pedidos, clique <Link to="/sign-in">aqui</Link> para logar, 
                     ou <Link to="/sign-up">aqui</Link> para se cadastrar, caso ainda não seja cliente :)
