@@ -1,13 +1,55 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components"
 import CardCounter from "./CardCounter";
 import CartContext from "../../contexts/CartContext"
+import { getProductById } from "../../services/Cabecudos";
+import { sendConfirm } from "./Alerts";
 
 
-export default function CartItem ({data}) {
-    const {id, name, price, stock, images} = data;
-    const [counterValue, setCounterValue] = useState(stock <= 0 ? 0 : 1)
+export default function CartItem ({id, qtd, index}) {
+    const [data, setData] = useState([{name: null}])
+    const {name, price, stock, images} = data[0];
     const {cart, setCart} = useContext(CartContext)
+    const [counterValue, setCounterValue] = useState(qtd)
+
+    useEffect(getItemData , [])
+
+    useEffect(changeCart, [counterValue])
+
+    function getItemData () {
+        getProductById(id)
+            .then(res => {
+                setData(res.data)
+                addPriceToCart(res.data[0].price)
+            })
+            .catch(err => console.log(err))
+    }
+
+    function changeCart () {
+        let newCart = [...cart]
+        if (counterValue === 0){
+            sendConfirm('warning', '🥺 Tem certeza?', `
+                Quer mesmo remover esse item do carrinho? Ele parece tão sozinho aqui...
+            `).then((result) => {
+                if (result.isConfirmed) {
+                    setCart(newCart.filter(e => e.id !== id))
+                } else {
+                    setCounterValue(counterValue + 1)
+                }
+              })
+        } else {
+            newCart[index].qtd = counterValue
+            setCart(newCart)
+        }
+    }
+
+    function addPriceToCart (price) {
+        let newCart = [...cart]
+        newCart[index] = {...cart[index], price: price}
+        setCart(newCart)
+    }
+
+    if (!name) return 'Loading...'
 
     return(
         <CartItemSC>
@@ -17,12 +59,12 @@ export default function CartItem ({data}) {
                 <CartItemPrice>R${(price*counterValue/100).toFixed(2)}</CartItemPrice>
             </CartItemInfoBox>
             <CardCounter 
-                    value={counterValue} 
-                    setValue={setCounterValue} 
-                    isDisabled={stock <= 0} 
-                    stock={stock}
-                    vertical
-                />
+                value={counterValue} 
+                setValue={setCounterValue} 
+                isDisabled={stock <= 0} 
+                stock={stock}
+                vertical
+            />
         </CartItemSC>
     )
 }

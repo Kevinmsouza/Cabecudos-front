@@ -15,6 +15,10 @@ function sendUserData(body) {
     return axios.post(BASE_URL+"/sign-up", body);
 }
 
+function getUserData(body) {
+    return axios.post(BASE_URL+"/sign-in", body);
+}
+
 function closeSession(token) {
     return axios.delete(`${BASE_URL}/sign-out`, createConfig(token));
 }
@@ -35,11 +39,17 @@ function deleteAddress(token, id) {
     return axios.delete(`${BASE_URL}/addresses/${id}`, createConfig(token));
 }
 
+function getProductById (id) {
+    return axios.get(`${BASE_URL}/products/${id}`)
+}
+
 export {
+    getUserData,
     sendUserData,
     closeSession,
     getProducts,
     getAddresses,
     postAddress,
     deleteAddress,
+    getProductById,
 }

@@ -5,16 +5,16 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import UserContext from "../contexts/UserContext";
+import CartContext from "../contexts/CartContext";
 import { closeSession } from "../services/Cabecudos";
 import { sendAlert } from "./shared/Alerts";
-import CartContext from "../contexts/CartContext";
 
 export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
-    // const {avatar, token} = useContext(UserContext);
     const {cart} = useContext(CartContext);
-    const avatar = null;
     const token = null;
+    // const { image, token } = useContext(UserContext);
+    const image = null;
     const history = useHistory();
 
     function relocate(whereTo) {
@@ -57,13 +57,13 @@ export default function Menu() {
                         </Counter>
                     </Cart>
                     <Avatar showDropDown={showDropDown} onClick={() => setShowDropDown(!showDropDown)}>
-                        <img src={avatar||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
+                        <img src={image||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
                         <IoIosArrowDown />
                     </Avatar>
                 </Buttons>
             </Wrapper>
-            <DropDownMenu showDropDown={showDropDown} avatar={avatar}>
-                {token ? 
+            <DropDownMenu showDropDown={showDropDown} image={image}>
+                {image ? 
                     <p onClick={logoutHandler}>Sair</p> :
                     <>
                         <p onClick={() => relocate("/sign-in")}>Entrar</p>
@@ -103,7 +103,7 @@ const Blank = styled.div`
 const DropDownMenu = styled.div`
     position: fixed;
     z-index: 2;
-    top: ${({showDropDown, avatar}) => showDropDown ? `50px` : avatar ? `20px` : `-15px`};    
+    top: ${({showDropDown, image}) => showDropDown ? `50px` : image ? `20px` : `-15px`};    
     right: 0;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
     width: 100px;
