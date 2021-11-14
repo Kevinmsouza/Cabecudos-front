@@ -12,13 +12,6 @@ import Menu from "./components/Menu";
 export default function App() {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart"))||[]);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
-    // Gets cart info from local storage if possible
-    // useEffect(() => {
-    //     const localCart = localStorage.getItem("cart");
-    //     if (localCart) {
-    //         setCart(JSON.parse(localCart));
-    //     }
-    // }, []);
 
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cart));

@@ -9,7 +9,6 @@ import { sendAlert } from "./Alerts";
 import Loader from "react-loader-spinner";
 
 export default function Addresses({defaultAddress, setDefaultAddress, reload, setReload}) {
-    // const {id, token} = useContext(UserContext);
     const {user} = useContext(UserContext);
     const [addresses, setAddresses] = useState([]);
     const [isFormOpen, setIsFormOpen] = useState(false);
