@@ -51,7 +51,9 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
             setLoading(false);
         })
         .catch(err => {
-            sendAlert('error', 'Preencha os campos corretamente.');
+            console.log(err.response.status)
+            if(err.response.status === 400) sendAlert('error', 'O endereço deve informar Rua e Número', 'Ex: Rua Primavera, 325');
+            else sendAlert('error', 'Preencha os campos corretamente.');
             setLoading(false);
         })
     }
@@ -82,7 +84,7 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
                     <p>CEP</p>
                     <Input required title="Utilize o formato XXXXX-XXX" pattern="^[0-9]{5}-[0-9]{3}$" type="text" value={postalCode} onChange={onChangeHandler} placeholder="Ex: 85903-320"/>
                     <p>Endereço</p>
-                    <Input required type="text" pattern="[a-z]{1,}.*[0-9]{1,}\i" maxLength="40" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: Rua Primavera, 285"/>
+                    <Input required type="text" maxLength="40" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: Rua Primavera, 285"/>
                     <p>Complemento<span> (opcional)</span></p>
                     <Input type="text" maxLength="30" value={comp} onChange={e => setComp(e.target.value)} placeholder="Apt. 14"/>
                     <Button loading={loading} type="submit">{loading ? <Loader type="ThreeDots" color="#FFFFFF" height={13} /> : `Registrar endereço`}</Button>
