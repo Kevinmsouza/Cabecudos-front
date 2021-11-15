@@ -21,12 +21,14 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
         getAddresses(user.token)
         .then(res => {
             setAddresses(res.data);
-            setDefaultAddress(res.data[0].id);
+            if (!defaultAddress) {
+                setDefaultAddress(res.data[0].id);
+            }
         })
         .catch(err => {
             console.log(err);
         });
-    },[setDefaultAddress, reload, user.token]);
+    },[reload]);
 
     function newAddressHandler(e) {
         e.preventDefault();
