@@ -5,6 +5,7 @@ import { SignContainer, PopButton } from "../shared/styledComponents.js";
 import { getUserData } from "../../services/Cabecudos.js";
 import UserContext from "../../contexts/UserContext.js";
 import Logo from '../../assets/logo2.png';
+import Loader from "react-loader-spinner";
 import styled from "styled-components";
 
 export default function SignIn() {
@@ -28,7 +29,7 @@ export default function SignIn() {
         })
         .catch(answer => {
             console.log(answer.response);
-            setRequesting(false);
+            setRequesting(true);
             setData({ ...data, password:"", });
             sendAlert('error', 'Oops! :(', 'Usuario e/ou senha incorreto(s)');
         });    
@@ -46,7 +47,7 @@ export default function SignIn() {
                     <PopInput placeholder="Senha" disabled={requesting} type="password" value={data.password} onChange={(e)=>setData({...data, password: e.target.value})} required ></PopInput>
                 </InputWrapper>
                 <ButtonsWrapper>
-                    <PopButton disabled={requesting} type="submit" >{ requesting ? "Entrando..." : "Entrar" }</PopButton>
+                    <PopButton disabled={requesting} type="submit" >{ requesting ? <Loader type="ThreeDots" color="#FFFFFF" height={13} /> : "Entrar" }</PopButton>
                     <p className="switch-sign" onClick={() => requesting ? '' : history.push('/sign-up')} >Primeira vez? Cadastre-se! </p>
                 </ButtonsWrapper>
             </SignStyles>
@@ -85,6 +86,7 @@ const PopInput = styled.input`
     padding: 0px 10px;
     font-size: 18px;
     font-weight: 400;
+    background: ${props => props.disabled ? "#ddd" : '#fff' }
 `;
 
 const InputWrapper = styled.div`

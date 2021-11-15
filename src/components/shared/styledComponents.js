@@ -35,6 +35,7 @@ const PopInput = styled.input`
     padding: 0px 10px;
     font-size: 14px;
     font-weight: 400;
+    background: ${props => props.disabled ? '#ddd' : '#fff' };
 `;
 
 const InputWrapper = styled.div`
