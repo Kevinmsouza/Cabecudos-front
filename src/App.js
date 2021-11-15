@@ -9,6 +9,7 @@ import CartContext from "./contexts/CartContext";
 import Home from "./components/pages/Home";
 import Menu from "./components/Menu";
 import { getCart, postCart } from "./services/Cabecudos";
+import History from "./components/pages/History";
 
 export default function App() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
@@ -53,6 +54,9 @@ export default function App() {
                             </Route>
                             <Route path="/cart" exact >
                                 <Cart />
+                            </Route>
+                            <Route path="/history" exact>
+                                <History />
                             </Route>
                         </>
                         <Route path="*">
