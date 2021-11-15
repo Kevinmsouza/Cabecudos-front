@@ -29,7 +29,7 @@ export default function SignIn() {
         })
         .catch(answer => {
             console.log(answer.response);
-            setRequesting(true);
+            setRequesting(false);
             setData({ ...data, password:"", });
             sendAlert('error', 'Oops! :(', 'Usuario e/ou senha incorreto(s)');
         });    
