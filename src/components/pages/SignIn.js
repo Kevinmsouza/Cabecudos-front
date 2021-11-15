@@ -7,8 +7,7 @@ import UserContext from "../../contexts/UserContext.js";
 import Logo from '../../assets/logo2.png';
 import styled from "styled-components";
 
-export default function SignIn() {
-
+export default function SignIn({decideCart}) {
     const [ data, setData ] = useState({ email:"", password:"", });
     const [ requesting, setRequesting ]= useState(false);
     const { setUser } = useContext(UserContext);
@@ -24,6 +23,7 @@ export default function SignIn() {
             setRequesting(false);
             setUser(answer.data);
             localStorage.setItem("user", JSON.stringify(answer.data));
+            decideCart(answer.data.token)
             history.push('/');
         })
         .catch(answer => {
