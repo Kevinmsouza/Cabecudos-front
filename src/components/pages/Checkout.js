@@ -8,10 +8,11 @@ import UserContext from "../../contexts/UserContext";
 import { postPurchase } from "../../services/Cabecudos";
 import { sendAlert } from "../shared/Alerts";
 import checkout from "../../assets/checkout.gif";
+import Load from "../shared/Load";
 
 export default function Checkout({defaultAddress, setDefaultAddress, checkingOut, setCheckingOut}) {
     const history = useHistory();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const {cart, setCart} = useContext(CartContext);
     const {user} = useContext(UserContext);
 
@@ -41,13 +42,9 @@ export default function Checkout({defaultAddress, setDefaultAddress, checkingOut
        
     }
 
-    if(loading) {
-        return (
-            <PageStyle>
-                Loading...
-            </PageStyle>
-        );
-    }
+    if (loading) {
+        return <Load />
+    } 
 
     return (
         <PageStyle>

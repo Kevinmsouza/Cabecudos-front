@@ -129,8 +129,10 @@ const CardButtom = styled.button`
     font-size: 18px;
     line-height: 27px;
     font-family: "Poppins", sans-serif;
+    cursor: pointer;
     &:disabled {
         background-color: lightgrey;
+        cursor: initial;
     }
 `;
 

@@ -84,6 +84,7 @@ const CardImg = styled.img`
     border-radius: 30px;
     object-fit: cover;
     border: 5px solid ${props => props.color};
+    cursor: pointer;
 `;
 
 const CardImgBox = styled.div`

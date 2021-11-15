@@ -115,6 +115,7 @@ const DropDownMenu = styled.div`
     align-items: center;
     border-radius: 0 0 0 10px;
     transition: 200ms;
+    cursor: pointer;
     & p {
         width: 100%;
         padding: 8px 6px;
@@ -132,6 +133,7 @@ const Avatar = styled.div`
     gap: 5px;
     height: 50px;
     padding-right: 8px;
+    cursor: pointer;
     & img {
         width: 28px;
         height: 28px;
@@ -166,6 +168,7 @@ const Cart = styled.button`
     border: none;
     background: inherit;
     font-size: 16px;
+    cursor: pointer;
 `;
 
 const Logo = styled.div`
@@ -174,6 +177,7 @@ const Logo = styled.div`
     align-items: center;
     gap: 3px;
     font-family: 'Luckiest Guy', cursive;
+    cursor: pointer;
     & img {
         width: 30px;
     }

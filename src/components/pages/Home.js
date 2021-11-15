@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import CartContext from "../../contexts/CartContext";
 import { getProducts } from "../../services/Cabecudos";
 import Card from "../shared/Card";
+import Load from "../shared/Load";
 import { PageStyle } from "../shared/styledComponents";
 
 
@@ -20,7 +21,9 @@ export default function Home () {
     }
 
 
-    if (!products) return 'loading...'
+    if (!products) {
+        return <Load />
+    } 
 
     return (
         <PageStyle>

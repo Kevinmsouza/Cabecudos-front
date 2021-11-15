@@ -64,7 +64,9 @@ const CounterButtom = styled.button`
     background-color: #ffffff;
     display:flex;
     text-align: center;
+    cursor: pointer;
     &:disabled {
         color: lightgrey;
+        cursor: initial;
     }
 `;
