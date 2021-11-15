@@ -51,6 +51,14 @@ function postPurchase(token, body) {
     return axios.post(`${BASE_URL}/purchases`, body, createConfig(token));
 }
 
+function getCart (token) {
+    return axios.get(`${BASE_URL}/carts`, createConfig(token))
+}
+
+function postCart (token, cart){
+    return axios.post(`${BASE_URL}/carts`, {cart: JSON.stringify(cart)}, createConfig(token))
+}
+
 export {
     getUserData,
     sendUserData,
@@ -62,4 +70,6 @@ export {
     getProductById,
     getOrders,
     postPurchase,
+    getCart,
+    postCart,
 }
