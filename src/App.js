@@ -8,6 +8,7 @@ import UserContext from "./contexts/UserContext";
 import CartContext from "./contexts/CartContext";
 import Home from "./components/pages/Home";
 import Menu from "./components/Menu";
+import History from "./components/pages/History";
 
 export default function App() {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart"))||[]);
@@ -31,6 +32,9 @@ export default function App() {
                             </Route>
                             <Route path="/cart" exact >
                                 <Cart />
+                            </Route>
+                            <Route path="/history" exact>
+                                <History />
                             </Route>
                         </>
                         <Route path="*">
