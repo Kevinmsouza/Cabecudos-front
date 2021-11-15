@@ -13,8 +13,7 @@ import { getCart, postCart } from "./services/Cabecudos";
 export default function App() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart"))||[]);
-    console.log(cart)
-
+    
     useEffect(() => {
         decideCart(user.token)
     }, [])
