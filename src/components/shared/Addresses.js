@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { getAddresses, postAddress } from "../../services/Cabecudos";
 import Address from "./Address";
 import { GrFormClose } from 'react-icons/gr';
-import { useContext } from "react/cjs/react.development";
+import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 import { sendAlert } from "./Alerts";
 import Loader from "react-loader-spinner";

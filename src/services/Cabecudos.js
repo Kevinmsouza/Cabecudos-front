@@ -43,6 +43,14 @@ function getProductById (id) {
     return axios.get(`${BASE_URL}/products/${id}`)
 }
 
+function getCart (token) {
+    return axios.get(`${BASE_URL}/carts`, createConfig(token))
+}
+
+function postCart (token, cart){
+    return axios.post(`${BASE_URL}/carts`, {cart: JSON.stringify(cart)}, createConfig(token))
+}
+
 export {
     getUserData,
     sendUserData,
@@ -52,4 +60,6 @@ export {
     postAddress,
     deleteAddress,
     getProductById,
+    getCart,
+    postCart,
 }
