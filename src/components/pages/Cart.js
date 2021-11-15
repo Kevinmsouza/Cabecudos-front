@@ -34,7 +34,15 @@ export default function Cart () {
                 }
                 <TotalPrice><p>Total: </p> <PriceSpan>R$ {calcTotal().toFixed(2)}</PriceSpan></TotalPrice>
             </CartWrapper>
-            {user.token?<Addresses defaultAddress={defaultAddress} setDefaultAddress={setDefaultAddress} reload={reload} setReload={setReload}/>:""}
+            {
+                user.token && 
+                <Addresses 
+                    defaultAddress={defaultAddress} 
+                    setDefaultAddress={setDefaultAddress} 
+                    reload={reload} 
+                    setReload={setReload}
+                />
+            }
         </PageStyle>
     )
 }
