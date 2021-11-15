@@ -11,10 +11,8 @@ import { sendAlert } from "./shared/Alerts";
 
 export default function Menu() {
     const [showDropDown, setShowDropDown] = useState(false);
-    // const { image, token } = useContext(UserContext);
-    // const { cart } = useContext(CartContext);
-    const image = null;
-    const cart = [];
+    const {cart} = useContext(CartContext);
+    const { user} = useContext(UserContext);
     const history = useHistory();
 
     function relocate(whereTo) {
@@ -23,16 +21,24 @@ export default function Menu() {
     }
 
     function logoutHandler() {
-        // closeSession(token)
-        // .then(res => {
-        //     localStorage.clear();
-        //     Location.reload();
-        // })
-        // .catch(err => {
-        //     sendAlert("error", "Oops... ;(", "Houve um problema para terminar a sessão, tente novamente.");
-        // })
+        closeSession(user.token)
+        .then(res => {
+            localStorage.removeItem("user");
+            window.location.reload();
+        })
+        .catch(err => {
+            sendAlert("error", "Oops... ;(", "Houve um problema para terminar a sessão, tente novamente.");
+        });
     }
 
+    function cartCounter() {
+        let counter = 0;
+        cart.forEach(item => {
+            counter+= item.qtd;
+        });
+        return counter;
+    }
+    
     return (
         <>
             <Wrapper>
@@ -43,16 +49,18 @@ export default function Menu() {
                 <Buttons>
                     <Cart onClick={() => relocate("/cart")}>
                         <RiShoppingCartLine />
-                        <Counter>{cart.length}</Counter>
+                        <Counter>
+                            {cartCounter()}
+                        </Counter>
                     </Cart>
                     <Avatar showDropDown={showDropDown} onClick={() => setShowDropDown(!showDropDown)}>
-                        <img src={image||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
+                        <img src={user.image||"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"} alt="Avatar"/>
                         <IoIosArrowDown />
                     </Avatar>
                 </Buttons>
             </Wrapper>
-            <DropDownMenu showDropDown={showDropDown} image={image}>
-                {image ? 
+            <DropDownMenu showDropDown={showDropDown} token={user.token}>
+                {user.token ? 
                     <p onClick={logoutHandler}>Sair</p> :
                     <>
                         <p onClick={() => relocate("/sign-in")}>Entrar</p>
@@ -92,8 +100,9 @@ const Blank = styled.div`
 const DropDownMenu = styled.div`
     position: fixed;
     z-index: 2;
-    top: ${({showDropDown, image}) => showDropDown ? `50px` : image ? `20px` : `-15px`};    
+    top: ${({showDropDown, token}) => showDropDown ? `50px` : token ? `20px` : `-15px`};    
     right: 0;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
     width: 100px;
     background: #FFFFFF;
     font-size: 13px;
@@ -121,6 +130,9 @@ const Avatar = styled.div`
     padding-right: 8px;
     & img {
         width: 28px;
+        height: 28px;
+        border-radius: 100px;
+        object-fit: cover;
     }
     svg {
         transform: rotate(${({showDropDown}) => showDropDown ? `180deg` : `0deg`});

@@ -76,7 +76,6 @@ const CartItemSC = styled.div`
     padding: 0 5px;
     background-color: #ffffff;
     border-bottom: 1px solid lightgray;
-
 `;
 
 const CartItemImg = styled.img`
