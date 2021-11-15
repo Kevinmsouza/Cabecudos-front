@@ -47,6 +47,10 @@ function getOrders (token, userId) {
     return axios.get(`${BASE_URL}/purchases/${userId}`, createConfig(token));
 }
 
+function postPurchase(token, body) {
+    return axios.post(`${BASE_URL}/purchases`, body, createConfig(token));
+}
+
 export {
     getUserData,
     sendUserData,
@@ -57,4 +61,5 @@ export {
     deleteAddress,
     getProductById,
     getOrders,
+    postPurchase,
 }

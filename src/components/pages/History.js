@@ -46,6 +46,9 @@ const EmptyMsg = styled.p`
     line-height: 20px;
     width: 280px;
     margin-top: 200px;
+    & a {
+        color: #00A4C5;
+    }
 `;
 
 const Title = styled.p`

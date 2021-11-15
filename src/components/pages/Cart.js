@@ -7,9 +7,8 @@ import Addresses from "../shared/Addresses";
 import { paymentAlert, sendAlert } from "../shared/Alerts";
 import CartItem from "../shared/CartItem";
 
-export default function Cart () {
+export default function Cart ({defaultAddress, setDefaultAddress, checkingOut, setCheckingOut}) {
     const {user} = useContext(UserContext);
-    const [defaultAddress, setDefaultAddress] = useState(null);
     const [reload, setReload] = useState(false);
     const {cart} = useContext(CartContext)
     const history = useHistory();
@@ -31,7 +30,8 @@ export default function Cart () {
         paymentAlert()
         .then((result) => {
             if(result.isConfirmed) {
-                sendAlert('success', 'Seu pedido foi realizado!', 'Vá até seu histórico para ver seus pedidos :)')
+                setCheckingOut(true);
+                history.push('/checkout');
             } else if(result.isDenied) {
                 return;
             }
