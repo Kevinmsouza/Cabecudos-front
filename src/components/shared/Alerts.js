@@ -24,7 +24,7 @@ function sendConfirm (type, title, text) {
       })
 }
 
-function paymentAlert (teste) {
+function paymentAlert () {
     const MySwal = withReactContent(Swal)
 
     return MySwal.fire({

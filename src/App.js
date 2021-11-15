@@ -10,10 +10,13 @@ import Home from "./components/pages/Home";
 import Menu from "./components/Menu";
 import { getCart, postCart } from "./services/Cabecudos";
 import History from "./components/pages/History";
+import Checkout from "./components/pages/Checkout";
 
 export default function App() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || {});
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart"))||[]);
+    const [defaultAddress, setDefaultAddress] = useState(null);
+    const [checkingOut, setCheckingOut] = useState(false);
     
     useEffect(() => {
         decideCart(user.token)
@@ -53,10 +56,23 @@ export default function App() {
                                 <Home />
                             </Route>
                             <Route path="/cart" exact >
-                                <Cart />
+                                <Cart 
+                                    defaultAddress={defaultAddress} 
+                                    setDefaultAddress={setDefaultAddress} 
+                                    checkingOut={checkingOut}
+                                    setCheckingOut={setCheckingOut}
+                                />
                             </Route>
                             <Route path="/history" exact>
                                 <History />
+                            </Route>
+                            <Route path="/checkout" exact>
+                                <Checkout 
+                                    defaultAddress={defaultAddress} 
+                                    setDefaultAddress={setDefaultAddress}
+                                    checkingOut={checkingOut}
+                                    setCheckingOut={setCheckingOut}
+                                />
                             </Route>
                         </>
                         <Route path="*">

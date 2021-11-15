@@ -15,6 +15,9 @@ export default function Address({oldAddress, defaultAddress, setDefaultAddress, 
             if(result.isConfirmed) {
                 deleteAddress(user.token, id)
                 .then(res => {
+                    if(defaultAddress === id) {
+                        setDefaultAddress(null);
+                    }
                     setReload(!reload);
                 })
                 .catch(err => {
