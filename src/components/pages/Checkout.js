@@ -11,7 +11,7 @@ import checkout from "../../assets/checkout.gif";
 
 export default function Checkout({defaultAddress, setDefaultAddress, checkingOut, setCheckingOut}) {
     const history = useHistory();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const {cart, setCart} = useContext(CartContext);
     const {user} = useContext(UserContext);
 
@@ -27,6 +27,7 @@ export default function Checkout({defaultAddress, setDefaultAddress, checkingOut
         };
         postPurchase(user.token, body)
         .then(res => {
+            setCheckingOut(false);
             setLoading(false);
             setCart([]);
             setDefaultAddress(null);
@@ -34,6 +35,7 @@ export default function Checkout({defaultAddress, setDefaultAddress, checkingOut
         .catch(err => {
             sendAlert('error', 'Oops... :(', 'Ocorreu um erro inesperado ao finalizar sua compra, tente novamente mais tarde.')
             setLoading(false);
+            setCheckingOut(false);
             history.push('/cart');
         })
        
