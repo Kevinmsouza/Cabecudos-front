@@ -4,6 +4,7 @@ import CardCounter from "./CardCounter";
 import CartContext from "../../contexts/CartContext"
 import { getProductById } from "../../services/Cabecudos";
 import { sendConfirm } from "./Alerts";
+import Load from "./Load";
 
 
 export default function CartItem ({id, qtd, index}) {
@@ -49,7 +50,9 @@ export default function CartItem ({id, qtd, index}) {
         setCart(newCart)
     }
 
-    if (!name) return 'Loading...'
+    if (!name) {
+        return <Load />
+    } 
 
     return(
         <CartItemSC>

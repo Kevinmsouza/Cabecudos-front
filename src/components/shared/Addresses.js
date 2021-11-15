@@ -7,6 +7,7 @@ import { useContext } from "react";
 import UserContext from "../../contexts/UserContext";
 import { sendAlert } from "./Alerts";
 import Loader from "react-loader-spinner";
+import Load from "./Load";
 
 export default function Addresses({defaultAddress, setDefaultAddress, reload, setReload}) {
     const {user} = useContext(UserContext);
@@ -15,7 +16,7 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
     const [postalCode, setPostalCode] = useState("");
     const [address, setAddress] = useState("");
     const [comp, setComp] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     
     useEffect(() => {
         getAddresses(user.token)
@@ -40,7 +41,7 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
             comp: comp||"(sem complemento)",
         }
 
-        setLoading(true);
+        setIsLoading(true);
         postAddress(user.token, body)
         .then(res => {
             setReload(!reload);
@@ -48,13 +49,13 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
             setPostalCode("");
             setAddress("");
             setComp("");
-            setLoading(false);
+            setIsLoading(false);
         })
         .catch(err => {
             console.log(err.response.status)
             if(err.response.status === 400) sendAlert('error', 'O endereço deve informar Rua e Número', 'Ex: Rua Primavera, 325');
             else sendAlert('error', 'Preencha os campos corretamente.');
-            setLoading(false);
+            setIsLoading(false);
         })
     }
     function onChangeHandler(e) {
@@ -71,15 +72,16 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
     }
 
     return (
-        <Wrapper>
+        <Wrapper isLoading={isLoading}>
             <Title>Endereço de entrega:</Title>
             {addresses.map(address => 
-            <Address oldAddress={address} key={address.id} defaultAddress={defaultAddress} setDefaultAddress={setDefaultAddress} reload={reload} setReload={setReload}/>
+            <Address setIsLoading={setIsLoading} isLoading={isLoading} oldAddress={address} key={address.id} defaultAddress={defaultAddress} setDefaultAddress={setDefaultAddress} reload={reload} setReload={setReload}/>
             )}
+            {isLoading&&<Load />}
             <Divider />
             {isFormOpen||<Button onClick={() => setIsFormOpen(true)}>Novo endereço</Button>}
             {isFormOpen ? 
-                <AddressForm onSubmit={newAddressHandler} loading={loading}>
+                <AddressForm onSubmit={newAddressHandler} isLoading={isLoading}>
                     <Close onClick={(e) => {e.preventDefault(); setIsFormOpen(false)}}><GrFormClose/></Close>
                     <p>CEP</p>
                     <Input required title="Utilize o formato XXXXX-XXX" pattern="^[0-9]{5}-[0-9]{3}$" type="text" value={postalCode} onChange={onChangeHandler} placeholder="Ex: 85903-320"/>
@@ -87,7 +89,7 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
                     <Input required type="text" maxLength="40" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: Rua Primavera, 285"/>
                     <p>Complemento<span> (opcional)</span></p>
                     <Input type="text" maxLength="30" value={comp} onChange={e => setComp(e.target.value)} placeholder="Apt. 14"/>
-                    <Button loading={loading} type="submit">{loading ? <Loader type="ThreeDots" color="#FFFFFF" height={13} /> : `Registrar endereço`}</Button>
+                    <Button isLoading={isLoading} type="submit">{isLoading ? <Loader type="ThreeDots" color="#FFFFFF" height={13} /> : `Registrar endereço`}</Button>
                 </AddressForm>
                 :
                 ""
@@ -122,10 +124,10 @@ const AddressForm = styled.form`
     flex-direction: column;
     font-size: 16px;
     line-height: 20px;
-    pointer-events: ${({loading}) => loading?`none`:`initial`};
+    pointer-events: ${({isLoading}) => isLoading?`none`:`initial`};
     & input {
-        background-color: ${({loading}) => loading?`#e0e0e0`:`#ffffff`};
-        opacity: ${({loading}) => loading?`0.4`:`1`};
+        background-color: ${({isLoading}) => isLoading?`#e0e0e0`:`#ffffff`};
+        opacity: ${({isLoading}) => isLoading?`0.4`:`1`};
     }
 `;
 
@@ -136,7 +138,7 @@ const Button = styled.button`
     background: #3EA4C4;
     color: #ffffff;
     border-radius: 6px;
-    opacity: ${({loading}) => loading?`0.7`:`1`};
+    opacity: ${({isLoading}) => isLoading?`0.7`:`1`};
 
 `;
 
@@ -165,4 +167,5 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+    pointer-events: ${({isLoading}) => isLoading?`none`:`initial`};
 `;

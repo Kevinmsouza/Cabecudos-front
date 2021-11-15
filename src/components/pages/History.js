@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import OrderCard from "../shared/OrderCard";
 import { Link } from "react-router-dom";
+import Load from "../shared/Load";
 
 export default function History() {
     const {user} = useContext(UserContext);
@@ -23,7 +24,9 @@ export default function History() {
         })
     }, [user.id, user.token])
 
-    if (pageLoad) return <PageStyle>Loading...</PageStyle>
+    if (pageLoad) {
+        return <Load />
+    } 
 
     return (
         <PageStyle>
