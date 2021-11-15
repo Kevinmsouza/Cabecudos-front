@@ -26,7 +26,7 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
         .catch(err => {
             console.log(err);
         });
-    },[setDefaultAddress, reload]);
+    },[setDefaultAddress, reload, user.token]);
 
     function newAddressHandler(e) {
         e.preventDefault();
@@ -49,15 +49,20 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
             setLoading(false);
         })
         .catch(err => {
-            if(postalCode.length<8) sendAlert('error', 'Preencha os dados corretamente.', "CEP deve ter 8 caracteres");
-            else sendAlert('error', 'Preencha os dados corretamente.', "Endereço deve possuir rua e numero");
-
+            sendAlert('error', 'Preencha os campos corretamente.');
             setLoading(false);
         })
     }
-
     function onChangeHandler(e) {
-        if(e.target.value.length>8) return;
+        if(e.target.value.length === 5) {
+            if (!postalCode.includes('-')) {
+                return setPostalCode(e.target.value + '-');
+            }
+            else {
+                return setPostalCode(e.target.value.replace('-',''));
+            }
+        } 
+        if(e.target.value.length>9) return;
         setPostalCode(e.target.value);
     }
 
@@ -73,9 +78,9 @@ export default function Addresses({defaultAddress, setDefaultAddress, reload, se
                 <AddressForm onSubmit={newAddressHandler} loading={loading}>
                     <Close onClick={(e) => {e.preventDefault(); setIsFormOpen(false)}}><GrFormClose/></Close>
                     <p>CEP</p>
-                    <Input type="number" maxlength="8" value={postalCode} onChange={onChangeHandler} placeholder="Ex: 85903-320"/>
+                    <Input required title="Utilize o formato XXXXX-XXX" pattern="^[0-9]{5}-[0-9]{3}$" type="text" value={postalCode} onChange={onChangeHandler} placeholder="Ex: 85903-320"/>
                     <p>Endereço</p>
-                    <Input type="text" maxLength="40" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: Rua Primavera, 285"/>
+                    <Input required type="text" pattern="[a-z]{1,}.*[0-9]{1,}\i" maxLength="40" value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: Rua Primavera, 285"/>
                     <p>Complemento<span> (opcional)</span></p>
                     <Input type="text" maxLength="30" value={comp} onChange={e => setComp(e.target.value)} placeholder="Apt. 14"/>
                     <Button loading={loading} type="submit">{loading ? <Loader type="ThreeDots" color="#FFFFFF" height={13} /> : `Registrar endereço`}</Button>
