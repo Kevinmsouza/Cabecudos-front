@@ -54,6 +54,7 @@ const Close = styled.button`
     border: none;
     font-size: 15px;
     opacity: 0.3;
+    cursor: pointer;
 `;
 
 const Info = styled.span`
@@ -95,4 +96,5 @@ const CheckCircle = styled.div`
     border-radius: 50px;
     border: ${({chosen}) => chosen ? `none` : `#333 1px solid`};
     background: ${({chosen}) => chosen ? `#3EA4C4` : `#ffffff`};
+    cursor: pointer;
 `;

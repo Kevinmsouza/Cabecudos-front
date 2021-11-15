@@ -81,8 +81,10 @@ const CheckoutButton = styled.button`
     color: #ffffff;
     font-weight: 700;
     letter-spacing: 2px;
+    cursor: pointer;
     &:disabled {
         background-color: lightgrey;
+        cursor: initial;
     }
 `;
 

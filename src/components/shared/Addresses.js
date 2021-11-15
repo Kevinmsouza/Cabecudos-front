@@ -117,6 +117,7 @@ const Close = styled.div`
     font-weight: 700;
     text-align: right;
     margin-left: 90%;
+    cursor: pointer;
 `;
 
 const AddressForm = styled.form`
@@ -139,7 +140,7 @@ const Button = styled.button`
     color: #ffffff;
     border-radius: 6px;
     opacity: ${({isLoading}) => isLoading?`0.7`:`1`};
-
+    cursor: pointer;
 `;
 
 const Divider = styled.div`
