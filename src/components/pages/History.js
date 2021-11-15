@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useEffect } from "react";
 import { getOrders } from "../../services/Cabecudos";
-import { useContext, useState } from "react/cjs/react.development";
+import { useContext, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import OrderCard from "../shared/OrderCard";
 import { Link } from "react-router-dom";
