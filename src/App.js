@@ -33,7 +33,7 @@ export default function App() {
         if (loginToken) {
             getCart(loginToken)
                 .then(res => {
-                    setCart(JSON.parse(res.data[0].cart_text))
+                    if(res.data.length) setCart(JSON.parse(res.data[0].cart_text));
                 })
         } else{
             return localCart

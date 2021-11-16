@@ -43,8 +43,8 @@ export default function Menu() {
         <>
             <Wrapper>
                 <Logo onClick={() => relocate("/")}>
-                    <p>Cabeçudos</p>
                     <img src={logo} alt="Cabeçudos"/>
+                    <p>Cabeçudos</p>
                 </Logo>
                 <Buttons>
                     <Cart onClick={() => relocate("/cart")}>
@@ -82,7 +82,7 @@ const Wrapper = styled.header`
     z-index: 3;
     top: 0;
     left: 0;
-    height: 50px;
+    height: 70px;
     width: 100%;
     background: #FFFFFF;
     display: flex;
@@ -104,12 +104,12 @@ const Blank = styled.div`
 const DropDownMenu = styled.div`
     position: fixed;
     z-index: 2;
-    top: ${({showDropDown, token}) => showDropDown ? `50px` : token ? `-15px` : `-15px`};    
+    top: ${({showDropDown, token}) => showDropDown ? `70px` : token ? `-15px` : `-15px`};    
     right: 0;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
-    width: 100px;
+    width: 130px;
     background: #FFFFFF;
-    font-size: 13px;
+    font-size: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,18 +131,24 @@ const Avatar = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
-    height: 50px;
-    padding-right: 8px;
+    height: 70px;
+    padding: 0 8px;
     cursor: pointer;
     & img {
-        width: 28px;
-        height: 28px;
+        width: 42px;
+        height: 42px;
         border-radius: 100px;
         object-fit: cover;
     }
     svg {
         transform: rotate(${({showDropDown}) => showDropDown ? `180deg` : `0deg`});
         transition: 200ms;
+    }
+    @media (max-width: 330px) {
+        & img {
+            width: 32px;
+            height: 32px;
+        }
     }
 `;
 
@@ -158,31 +164,46 @@ const Counter = styled.div`
     right: 0;
     background: #00A4C5;
     border-radius: 30px;
-    font-size: 12px;
+    font-size: 16px;
     max-width: 50px;
     min-width: 17px;
+    @media (max-width: 330px) {
+        font-size: 12px;
+    }
 `;
 
 const Cart = styled.button`
     position: relative;
     border: none;
     background: inherit;
-    font-size: 16px;
+    font-size: 30px;
     cursor: pointer;
+    @media (max-width: 330px) {
+        font-size: 20px;
+    }
 `;
 
 const Logo = styled.div`
     display: flex;
     padding-left: 8px;
+    height: 100%;
     align-items: center;
     gap: 3px;
     font-family: 'Luckiest Guy', cursive;
     cursor: pointer;
     & img {
-        width: 30px;
+        width: 60px;
     }
     p {
         margin-top: 8px;
-        font-size: 18px;
+        font-size: 24px;
+    }
+    @media (max-width: 330px) {
+        & img {
+            width: 30px;
+        }
+        p {
+            font-size: 20px;
+        }
     }
 `;

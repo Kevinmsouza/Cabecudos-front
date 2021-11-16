@@ -12,7 +12,7 @@ export default function PaymentMethod() {
     return (
         <Wrapper >
             <Option onClick={() => paymentHandler('pix')}>
-                <Image src="https://logospng.org/download/pix/logo-pix-icone-512.png" />
+                <Image src="https://media.discordapp.net/attachments/906322138993164308/910223756629274685/logo-pix-icone-512.png" />
                 <CheckCircle chosen={chosen==='pix'} />
             </Option>
             <Option onClick={() => paymentHandler('ticket')}>

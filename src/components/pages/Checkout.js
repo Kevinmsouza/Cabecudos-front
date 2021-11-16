@@ -9,6 +9,7 @@ import { postPurchase } from "../../services/Cabecudos";
 import { sendAlert } from "../shared/Alerts";
 import checkout from "../../assets/checkout.gif";
 import Load from "../shared/Load";
+import Footer from "../Footer";
 
 export default function Checkout({defaultAddress, setDefaultAddress, checkingOut, setCheckingOut}) {
     const history = useHistory();
@@ -47,15 +48,18 @@ export default function Checkout({defaultAddress, setDefaultAddress, checkingOut
     } 
 
     return (
-        <PageStyle>
-            <SuccesMsg>
-                Obrigado por comprar com a gente! Seus funkos chegarão até você o mais rápido possível.
-            </SuccesMsg>
-            <SuccessFunko src={checkout}/>
-            <SuccesMsg>
-                Enquanto isso, você pode clicar <Link to='/history'>aqui</Link> para visualizar seus pedidos.
-            </SuccesMsg>
-        </PageStyle>
+        <>
+            <PageStyle>
+                <SuccesMsg>
+                    Obrigado por comprar com a gente! Seus funkos chegarão até você o mais rápido possível.
+                </SuccesMsg>
+                <SuccessFunko src={checkout}/>
+                <SuccesMsg>
+                    Enquanto isso, você pode clicar <Link to='/history'>aqui</Link> para visualizar seus pedidos.
+                </SuccesMsg>
+            </PageStyle>
+            <Footer />
+        </>
     );
 }
 
@@ -74,10 +78,11 @@ const SuccesMsg = styled.p`
 `;
 
 const PageStyle = styled.article`
-    margin: 65px 0;
+    margin: 85px 0;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
     flex-direction: column;
+    min-height: calc(100vh - 320px);
 `;

@@ -6,6 +6,7 @@ import UserContext from "../../contexts/UserContext";
 import OrderCard from "../shared/OrderCard";
 import { Link } from "react-router-dom";
 import Load from "../shared/Load";
+import Footer from "../Footer";
 
 export default function History() {
     const {user} = useContext(UserContext);
@@ -29,18 +30,21 @@ export default function History() {
     } 
 
     return (
-        <PageStyle>
-            <Title>Meus pedidos</Title>
-            {orders.length ?
-                orders.map(order => <OrderCard order={order} key={order.id}/>) :
-                user.token ? 
-                <EmptyMsg>Você ainda não possui nenhuma compra, clique <Link to="/">aqui</Link> para ver nossos produtos :)</EmptyMsg> :
-                <EmptyMsg>
-                    Você precisa estar logado para ver seus pedidos, clique <Link to="/sign-in">aqui</Link> para logar, 
-                    ou <Link to="/sign-up">aqui</Link> para se cadastrar, caso ainda não seja cliente :)
-                </EmptyMsg>
-            }
-        </PageStyle>
+        <>
+            <PageStyle>
+                <Title>Meus pedidos</Title>
+                {orders.length ?
+                    orders.map(order => <OrderCard order={order} key={order.id}/>) :
+                    user.token ? 
+                    <EmptyMsg>Você ainda não possui nenhuma compra, clique <Link to="/">aqui</Link> para ver nossos produtos :)</EmptyMsg> :
+                    <EmptyMsg>
+                        Você precisa estar logado para ver seus pedidos, clique <Link to="/sign-in">aqui</Link> para logar, 
+                        ou <Link to="/sign-up">aqui</Link> para se cadastrar, caso ainda não seja cliente :)
+                    </EmptyMsg>
+                }
+            </PageStyle>
+            <Footer />
+        </>
     );
 }
 
@@ -60,10 +64,11 @@ const Title = styled.p`
 `;
 
 const PageStyle = styled.article`
-    margin: 65px 0;
+    margin: 85px 0;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
     flex-direction: column;
+    min-height: calc(100vh - 320px);
 `;
