@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import CartContext from "../../contexts/CartContext";
 import { getProducts } from "../../services/Cabecudos";
+import Footer from "../Footer";
 import Card from "../shared/Card";
 import Load from "../shared/Load";
 import { PageStyle } from "../shared/styledComponents";
@@ -26,8 +27,11 @@ export default function Home () {
     } 
 
     return (
-        <PageStyle>
-            {products.map((e) => <Card data={e} key={e.id} />)}
-        </PageStyle>
+        <>
+            <PageStyle>
+                {products.map((e) => <Card data={e} key={e.id} />)}
+            </PageStyle>
+            <Footer />
+        </>
     )
 }
