@@ -43,8 +43,8 @@ export default function Menu() {
         <>
             <Wrapper>
                 <Logo onClick={() => relocate("/")}>
-                    <p>Cabeçudos</p>
                     <img src={logo} alt="Cabeçudos"/>
+                    <p>Cabeçudos</p>
                 </Logo>
                 <Buttons>
                     <Cart onClick={() => relocate("/cart")}>
@@ -135,14 +135,20 @@ const Avatar = styled.div`
     padding: 0 8px;
     cursor: pointer;
     & img {
-        width: 32px;
-        height: 32px;
+        width: 42px;
+        height: 42px;
         border-radius: 100px;
         object-fit: cover;
     }
     svg {
         transform: rotate(${({showDropDown}) => showDropDown ? `180deg` : `0deg`});
         transition: 200ms;
+    }
+    @media (max-width: 330px) {
+        & img {
+            width: 32px;
+            height: 32px;
+        }
     }
 `;
 
@@ -158,17 +164,23 @@ const Counter = styled.div`
     right: 0;
     background: #00A4C5;
     border-radius: 30px;
-    font-size: 12px;
+    font-size: 16px;
     max-width: 50px;
     min-width: 17px;
+    @media (max-width: 330px) {
+        font-size: 12px;
+    }
 `;
 
 const Cart = styled.button`
     position: relative;
     border: none;
     background: inherit;
-    font-size: 20px;
+    font-size: 30px;
     cursor: pointer;
+    @media (max-width: 330px) {
+        font-size: 20px;
+    }
 `;
 
 const Logo = styled.div`
@@ -180,10 +192,18 @@ const Logo = styled.div`
     font-family: 'Luckiest Guy', cursive;
     cursor: pointer;
     & img {
-        width: 30px;
+        width: 60px;
     }
     p {
         margin-top: 8px;
         font-size: 24px;
+    }
+    @media (max-width: 330px) {
+        & img {
+            width: 30px;
+        }
+        p {
+            font-size: 20px;
+        }
     }
 `;
