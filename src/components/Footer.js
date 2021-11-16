@@ -29,7 +29,6 @@ export default function Footer() {
             </Comm>
             <Logo>
                 <LogoImg src={logo} alt="Cabeçudos"/>
-
             </Logo>
         </Wrapper>
     );
