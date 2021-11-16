@@ -60,7 +60,7 @@ const Title = styled.p`
 `;
 
 const PageStyle = styled.article`
-    margin: 65px 0;
+    margin: 85px 0;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
