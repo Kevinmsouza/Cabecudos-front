@@ -111,7 +111,7 @@ const FormLogo = styled.div`
 `;
 
 const PageStyle = styled.article`
-    margin: 65px 0;
+    margin: 85px 0;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

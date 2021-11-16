@@ -82,7 +82,7 @@ const Wrapper = styled.header`
     z-index: 3;
     top: 0;
     left: 0;
-    height: 50px;
+    height: 70px;
     width: 100%;
     background: #FFFFFF;
     display: flex;
@@ -104,12 +104,12 @@ const Blank = styled.div`
 const DropDownMenu = styled.div`
     position: fixed;
     z-index: 2;
-    top: ${({showDropDown, token}) => showDropDown ? `50px` : token ? `-15px` : `-15px`};    
+    top: ${({showDropDown, token}) => showDropDown ? `70px` : token ? `-15px` : `-15px`};    
     right: 0;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.15);
-    width: 100px;
+    width: 130px;
     background: #FFFFFF;
-    font-size: 13px;
+    font-size: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,12 +131,12 @@ const Avatar = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
-    height: 50px;
-    padding-right: 8px;
+    height: 70px;
+    padding: 0 8px;
     cursor: pointer;
     & img {
-        width: 28px;
-        height: 28px;
+        width: 32px;
+        height: 32px;
         border-radius: 100px;
         object-fit: cover;
     }
@@ -167,13 +167,14 @@ const Cart = styled.button`
     position: relative;
     border: none;
     background: inherit;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
 `;
 
 const Logo = styled.div`
     display: flex;
     padding-left: 8px;
+    height: 100%;
     align-items: center;
     gap: 3px;
     font-family: 'Luckiest Guy', cursive;
@@ -183,6 +184,6 @@ const Logo = styled.div`
     }
     p {
         margin-top: 8px;
-        font-size: 18px;
+        font-size: 24px;
     }
 `;
